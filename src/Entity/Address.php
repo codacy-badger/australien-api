@@ -50,7 +50,7 @@ class Address
      *
      * @var string
      */
-    private $streetAdress;
+    private $streetAddress;
 
     /**
      * Locality.

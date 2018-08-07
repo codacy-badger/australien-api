@@ -1,4 +1,4 @@
-App\App\Entity\Dog:
+App\Entity\Dog:
   type: entity
   schema: data
   table: te_dog
@@ -77,18 +77,18 @@ App\App\Entity\Dog:
       nullable: true
   oneToMany:
     father:
-      targetEntity: App\App\Entity\Dog
+      targetEntity: App\Entity\Dog
     mother:
-      targetEntity: App\App\Entity\Dog
+      targetEntity: App\Entity\Dog
   manyToOne:
     kennel:
-      targetEntity: App\App\Entity\Kennel
+      targetEntity: App\Entity\Kennel
       inversedBy: dogs
       joinColumns:
         kennel_id:
           referencedColumnName: id
     owner:
-      targetEntity: App\App\Entity\Person
+      targetEntity: App\Entity\Person
       inversedBy: dogs
       joinColumns:
         owner_id:

@@ -133,7 +133,7 @@
       <field name="region" type="text" uuid="c1f601d1-23f8-4e46-8345-0168fad71985"/>
       <field name="postOfficeBoxNumber" type="text" uuid="1b59a2cb-9e91-4f9c-84b5-afb87bc6d4c2"/>
       <field name="postalCode" type="text" uuid="191ec5b8-c895-488d-8376-29d88305a4cf"/>
-      <field name="streetAdress" type="text" uuid="348ae7e5-4653-474f-92c5-af27ac662529"/>
+      <field name="streetAddress" type="text" uuid="348ae7e5-4653-474f-92c5-af27ac662529"/>
       <field name="locality_id" type="integer" unique="true" uuid="f4104963-59d3-4d18-acd2-bf524bb40e3e"/>
       <orm-attributes>
         <attribute name="repository-class">App\Repository\Address</attribute>

@@ -1,4 +1,4 @@
-App\App\Entity\Country:
+App\Entity\Country:
   type: entity
   schema: relation
   table: tr_country

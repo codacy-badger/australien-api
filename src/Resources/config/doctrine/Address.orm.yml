@@ -1,4 +1,4 @@
-App\App\Entity\Address:
+App\Entity\Address:
   type: entity
   repositoryClass: App\Repository\Address
   schema: data
@@ -18,12 +18,12 @@ App\App\Entity\Address:
     postalCode:
       type: text
       nullable: true
-    streetAdress:
+    streetAddress:
       type: text
       nullable: true
   oneToOne:
     locality:
-      targetEntity: App\App\Entity\Locality
+      targetEntity: App\Entity\Locality
       joinColumns:
         locality_id:
           referencedColumnName: id

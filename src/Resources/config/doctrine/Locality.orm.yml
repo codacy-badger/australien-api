@@ -1,4 +1,4 @@
-App\App\Entity\Locality:
+App\Entity\Locality:
   type: entity
   repositoryClass: App\Repository\LocalityRepository
   schema: relation
@@ -16,7 +16,7 @@ App\App\Entity\Locality:
       column: full_name_nd
   oneToOne:
     country:
-      targetEntity: App\App\Entity\Country
+      targetEntity: App\Entity\Country
       joinColumns:
         cc_fips:
           referencedColumnName: cc_fips

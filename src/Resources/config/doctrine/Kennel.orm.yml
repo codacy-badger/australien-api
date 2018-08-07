@@ -1,4 +1,4 @@
-App\App\Entity\Kennel:
+App\Entity\Kennel:
   type: entity
   repositoryClass: App\Repository\KennelRepository
   schema: data
@@ -14,18 +14,18 @@ App\App\Entity\Kennel:
       nullable: false
   oneToOne:
     address:
-      targetEntity: App\App\Entity\Address
+      targetEntity: App\Entity\Address
       joinColumns:
         address_id:
           referencedColumnName: id
           unique: true
   oneToMany:
     dogs:
-      targetEntity: App\App\Entity\Dog
+      targetEntity: App\Entity\Dog
       mappedBy: kennel
   manyToOne:
     owner:
-      targetEntity: App\App\Entity\Person
+      targetEntity: App\Entity\Person
       inversedBy: kennels
       joinColumns:
         owner_id:
