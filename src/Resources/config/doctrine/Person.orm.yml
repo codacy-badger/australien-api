@@ -60,6 +60,6 @@ App\App\Entity\Person:
     dogs:
       targetEntity: App\App\Entity\Dog
       mappedBy: owner
-    kennel:
+    kennels:
       targetEntity: App\App\Entity\Kennel
       mappedBy: owner

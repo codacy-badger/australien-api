@@ -26,7 +26,7 @@ App\App\Entity\Kennel:
   manyToOne:
     owner:
       targetEntity: App\App\Entity\Person
-      inversedBy: kennel
+      inversedBy: kennels
       joinColumns:
         owner_id:
           referencedColumnName: usr_id
