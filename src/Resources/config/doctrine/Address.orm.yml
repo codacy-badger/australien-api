@@ -1,0 +1,30 @@
+App\App\Entity\Address:
+  type: entity
+  repositoryClass: App\Repository\Address
+  schema: data
+  table: te_address
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    region:
+      type: text
+      nullable: true
+    postOfficeBoxNumber:
+      type: text
+      nullable: true
+    postalCode:
+      type: text
+      nullable: true
+    streetAdress:
+      type: text
+      nullable: true
+  oneToOne:
+    locality:
+      targetEntity: App\App\Entity\Locality
+      joinColumns:
+        locality_id:
+          referencedColumnName: id
+          unique: true

@@ -1,0 +1,65 @@
+App\App\Entity\Person:
+  type: entity
+  schema: data
+  repositoryClass: App\Repository\PersonRepository
+  table: te_owner
+  id:
+    id:
+      type: integer
+      column: usr_id
+      generator:
+        strategy: AUTO
+  fields:
+    additionalName:
+      type: text
+      nullable: true
+      column: usr_additional_name
+    email:
+      type: text
+      nullable: false
+      column: usr_email
+    familyName:
+      type: text
+      nullable: true
+      column: usr_family_name
+    givenName:
+      type: text
+      nullable: true
+      column: usr_given_name
+    jobTitle:
+      type: text
+      nullable: true
+      column: age_job_title
+    name:
+      type: text
+      nullable: true
+      column: usr_name
+    password:
+      type: text
+      nullable: true
+      column: usr_password
+    active:
+      type: boolean
+      nullable: false
+      column: usr_active
+      options:
+        default: true
+  uniqueConstraints:
+    uk_usr_email:
+      columns: [usr_email]
+  options:
+    comment: Utilisateurs de l'application
+  oneToOne:
+    address:
+      targetEntity: App\App\Entity\Address
+      joinColumns:
+        address_id:
+          referencedColumnName: id
+          unique: true
+  oneToMany:
+    dogs:
+      targetEntity: App\App\Entity\Dog
+      mappedBy: owner
+    kennel:
+      targetEntity: App\App\Entity\Kennel
+      mappedBy: owner

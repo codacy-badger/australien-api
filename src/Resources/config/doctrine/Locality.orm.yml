@@ -1,0 +1,23 @@
+App\App\Entity\Locality:
+  type: entity
+  repositoryClass: App\Repository\LocalityRepository
+  schema: relation
+  table: te_locality
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+      length: 200
+      nullable: false
+      column: full_name_nd
+  oneToOne:
+    country:
+      targetEntity: App\App\Entity\Country
+      joinColumns:
+        cc_fips:
+          referencedColumnName: cc_fips
+          unique: true

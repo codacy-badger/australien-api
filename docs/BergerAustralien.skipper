@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<skipper version="3.2.3.1247" mvc="Symfony2" orm="Doctrine2" name="berger-australien" uuid="e69bf476-ca30-4049-8c86-2100d8db7a16">
+  <module name="\MainBundle" local-name="MainBundle" namespace="\" uuid="cae614d0-4dd4-4a17-a744-54b5459bc78f">
+    <entity name="\App\Entity\Dog" local-name="Dog" namespace="\App\Entity" local-namespace="App\Entity" uuid="103e99b6-7933-491d-bd87-4b38e96ae93c">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="ece6dca6-0afc-4dd7-9565-55655d632f5a"/>
+      <field name="kennel_id" type="integer" uuid="1691cf74-368f-43d8-9f9b-b97c78d478ef"/>
+      <field name="father_id" type="integer" uuid="f53184f7-3491-4b40-8cb7-40858e872481"/>
+      <field name="mother_id" type="integer" uuid="fb1240a5-9551-4a04-8407-061b31e5470c"/>
+      <field name="owner_id" type="integer" uuid="758e838b-ad99-494b-b1a9-64b8b4ab1479"/>
+      <field name="birthday" type="date" uuid="7660448d-0c60-47db-b471-0789a8833830"/>
+      <field name="breeder" type="text" uuid="add0fcab-4b05-43c3-b293-2b2570243b6d"/>
+      <field name="deathday" type="date" uuid="d6bc0475-a408-4f87-a8fb-747f6b82f71c"/>
+      <field name="name" type="string" size="255" required="true" uuid="e07b4550-9edc-4e8e-9dab-078177c3763a"/>
+      <field name="pedigreeNumber" type="string" size="32" uuid="447c044b-ee9b-4a05-a022-32988dc11e72"/>
+      <field name="sex" type="boolean" uuid="1698f2c2-e411-4eb4-ad90-ca6c918bc744"/>
+      <field name="sterilized" type="boolean" default="false" required="true" uuid="03943490-7c37-48dc-880f-6549fb51dbec"/>
+      <field name="tatoo" type="string" size="16" uuid="ae3af14d-070b-49da-9653-e437c5279d2a"/>
+      <field name="hsf4" type="integer" uuid="9e59d611-44fc-4388-96b7-aa3ee27cc890"/>
+      <field name="hsf4_gentest" type="boolean" default="false" required="true" uuid="00b8fa6d-d17e-4328-b6ad-e4fe3ecb0538"/>
+      <field name="cea" type="integer" uuid="9aa5ef01-d967-49c5-907c-48366fa96c4a"/>
+      <field name="cea_gentest" type="boolean" default="false" required="true" uuid="8c7032fb-8442-4eb9-b8b7-ae52c25a4730"/>
+      <field name="pra" type="integer" uuid="0c2b9695-bbf7-40f8-9bb6-68ca448825eb"/>
+      <field name="pra_gentest" type="boolean" default="false" required="true" uuid="974db2ad-d946-4b53-80e3-225f402f8828"/>
+      <field name="mdr1" type="integer" uuid="fc2c9774-0927-4742-b517-b2a539976b25"/>
+      <field name="mdr1_gentest" type="boolean" default="false" required="true" uuid="38272923-6656-4ec6-9343-32a5142a42fa"/>
+      <field name="hd" description="hanche displasie" type="integer" uuid="04c4c3e8-38fe-46b9-a87c-70d131b2a47a"/>
+      <field name="ed" description="e????" type="integer" uuid="a94ffb69-c558-4d9a-8a28-d2760b60dc38"/>
+      <orm-attributes>
+        <attribute name="Gedmo">
+          <attribute name="Tree">
+            <attribute name="Fields">
+              <attribute name="TreeParent">father_id</attribute>
+            </attribute>
+          </attribute>
+        </attribute>
+        <attribute name="schema">data</attribute>
+        <attribute name="table">te_dog</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\App\Entity\Dog" to="\App\Entity\Dog" caption="Father" owner-alias="father" many-owner="true" many-inverse="false" uuid="3b9bd1e9-399e-4567-9fcd-281714b029d8">
+      <association-field from="father_id" to="id"/>
+    </association>
+    <association from="\App\Entity\Dog" to="\App\Entity\Dog" caption="Mother" owner-alias="mother" many-owner="true" many-inverse="false" uuid="e48680c6-fe50-4b66-aaac-82d2eba12352">
+      <association-field from="mother_id" to="id"/>
+    </association>
+    <association from="\App\Entity\Dog" to="\App\Entity\Kennel" caption="Kennel Dog" owner-alias="dogs" inverse-alias="kennel" many-owner="true" many-inverse="false" uuid="170c6e99-7668-4e9c-9e62-97c3ad2f27d4">
+      <association-field from="kennel_id" to="id"/>
+    </association>
+    <association from="\App\Entity\Dog" to="\App\Entity\Person" caption="Owner" owner-alias="dogs" inverse-alias="owner" many-owner="true" many-inverse="false" uuid="36137a85-baeb-4844-97ad-f5ea8656b811">
+      <association-field from="owner_id" to="id"/>
+    </association>
+    <entity name="\App\Entity\Kennel" local-name="Kennel" namespace="\App\Entity" local-namespace="App\Entity" uuid="e3c81e1e-4ea2-4760-a344-588a9d4800ad">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="3b6a58bd-37a7-4f47-aa53-a2e465f2195a"/>
+      <field name="legalName" type="text" required="true" uuid="445e0adf-1d56-4f84-b5d3-29f41f262f70"/>
+      <field name="owner_id" type="integer" uuid="fa124f72-7f59-4ff5-80f6-8a4e038ce5ae"/>
+      <field name="address_id" type="integer" unique="true" uuid="dbe73fe6-0fd7-4dd6-aaf4-788017e8a514"/>
+      <orm-attributes>
+        <attribute name="repository-class">App\Repository\KennelRepository</attribute>
+        <attribute name="schema">data</attribute>
+        <attribute name="table">te_kennel</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\App\Entity\Kennel" to="\App\Entity\Person" caption="Owner" owner-alias="kennel" inverse-alias="owner" many-owner="true" many-inverse="false" uuid="51e5c0cf-ae9c-402a-ac46-b19cc6356c38">
+      <association-field from="owner_id" to="id"/>
+    </association>
+    <association from="\App\Entity\Kennel" to="\App\Entity\Address" caption="Address Kennel" inverse-alias="address" many-owner="false" many-inverse="false" uuid="deea6ada-75cd-4e81-9dd7-ed34fa80a3cf">
+      <association-field from="address_id" to="id"/>
+    </association>
+    <entity name="\App\Entity\Person" local-name="Person" namespace="\App\Entity" local-namespace="App\Entity" description="Entit&#xE9; des utilisateurs" uuid="39ad74d5-8a93-478c-bf15-0473b0ff7b04">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="0e8c9bf0-d398-4ea0-ad9a-da48d22c4655">
+        <orm-attributes>
+          <attribute name="column">usr_id</attribute>
+        </orm-attributes>
+      </field>
+      <field name="additionalName" type="text" uuid="98bd9f59-9aa7-44ab-9957-d02221c0eed6">
+        <orm-attributes>
+          <attribute name="column">usr_additional_name</attribute>
+        </orm-attributes>
+      </field>
+      <field name="email" type="text" required="true" uuid="c09ec2af-304b-4c64-bb19-89b2c0521c7a">
+        <orm-attributes>
+          <attribute name="column">usr_email</attribute>
+        </orm-attributes>
+      </field>
+      <field name="familyName" type="text" uuid="ea783627-2352-4374-b368-31e6ec9ffe09">
+        <orm-attributes>
+          <attribute name="column">usr_family_name</attribute>
+        </orm-attributes>
+      </field>
+      <field name="givenName" description="First name" type="text" uuid="584e1f55-8866-49fb-8d1f-20e8892619ea">
+        <orm-attributes>
+          <attribute name="column">usr_given_name</attribute>
+        </orm-attributes>
+      </field>
+      <field name="jobTitle" type="text" uuid="c881cd43-0f27-4e85-a0d4-27cb2fb9d5ca">
+        <orm-attributes>
+          <attribute name="column">age_job_title</attribute>
+        </orm-attributes>
+      </field>
+      <field name="name" type="text" uuid="af2574c7-a2c3-45f8-9424-9c37ed8f9df4">
+        <orm-attributes>
+          <attribute name="column">usr_name</attribute>
+        </orm-attributes>
+      </field>
+      <field name="password" type="text" uuid="7637227b-d4fb-4b48-a5c0-c982006a49da">
+        <orm-attributes>
+          <attribute name="column">usr_password</attribute>
+        </orm-attributes>
+      </field>
+      <field name="active" description="is user active?" type="boolean" default="true" required="true" uuid="ba752933-aa4b-40a5-b685-180b73494d94">
+        <orm-attributes>
+          <attribute name="column">usr_active</attribute>
+        </orm-attributes>
+      </field>
+      <field name="address_id" type="integer" unique="true" uuid="a2c8cd44-c095-4bcb-abbf-031f8b5f727a"/>
+      <index name="uk_usr_email" unique="true">
+        <index-field name="email"/>
+      </index>
+      <orm-attributes>
+        <attribute name="schema">data</attribute>
+        <attribute name="repository-class">App\Repository\PersonRepository</attribute>
+        <attribute name="options">
+          <attribute name="comment">Utilisateurs de l'application</attribute>
+        </attribute>
+        <attribute name="table">te_owner</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\App\Entity\Person" to="\App\Entity\Address" caption="Address Person" inverse-alias="address" many-owner="false" many-inverse="false" uuid="1e901619-65f6-4cf1-a0c7-1f7f9cc819a2">
+      <association-field from="address_id" to="id"/>
+    </association>
+    <entity name="\App\Entity\Address" local-name="Address" namespace="\App\Entity" local-namespace="App\Entity" uuid="b49b424d-0be5-498d-836f-c63cbeb3d8ac">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="8c583030-be78-4541-9788-ae4136e8059c"/>
+      <field name="region" type="text" uuid="c1f601d1-23f8-4e46-8345-0168fad71985"/>
+      <field name="postOfficeBoxNumber" type="text" uuid="1b59a2cb-9e91-4f9c-84b5-afb87bc6d4c2"/>
+      <field name="postalCode" type="text" uuid="191ec5b8-c895-488d-8376-29d88305a4cf"/>
+      <field name="streetAdress" type="text" uuid="348ae7e5-4653-474f-92c5-af27ac662529"/>
+      <field name="locality_id" type="integer" unique="true" uuid="f4104963-59d3-4d18-acd2-bf524bb40e3e"/>
+      <orm-attributes>
+        <attribute name="repository-class">App\Repository\Address</attribute>
+        <attribute name="schema">data</attribute>
+        <attribute name="table">te_address</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\App\Entity\Address" to="\App\Entity\Locality" caption="Locality Address" inverse-alias="locality" many-owner="false" many-inverse="false" uuid="bb43e5bf-0391-4bb6-9665-a321e350fca5">
+      <association-field from="locality_id" to="id"/>
+    </association>
+    <entity name="\App\Entity\Locality" local-name="Locality" namespace="\App\Entity" local-namespace="App\Entity" uuid="dd6aa6ca-e5ac-44e3-84f2-a3ff9d0e2db3">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="826f1cdb-7ff9-41b1-8650-4ddf9e6a52ea"/>
+      <field name="name" type="string" size="200" required="true" uuid="23180dde-e6fe-4d0f-801b-64f5a88160ad">
+        <orm-attributes>
+          <attribute name="column">full_name_nd</attribute>
+        </orm-attributes>
+      </field>
+      <field name="country_code" type="string" size="2" unique="true" uuid="332f23e7-cbc3-4c4b-8eeb-e3674d143877">
+        <orm-attributes>
+          <attribute name="column">cc_fips</attribute>
+        </orm-attributes>
+      </field>
+      <orm-attributes>
+        <attribute name="repository-class">App\Repository\LocalityRepository</attribute>
+        <attribute name="schema">relation</attribute>
+        <attribute name="table">te_locality</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\App\Entity\Locality" to="\App\Entity\Country" caption="Country Locality" inverse-alias="country" many-owner="false" many-inverse="false" uuid="b956bc2e-bdd5-4678-a78c-30548b673a0b">
+      <association-field from="country_code" to="code"/>
+    </association>
+    <entity name="\App\Entity\Country" local-name="Country" namespace="\App\Entity" local-namespace="App\Entity" uuid="8a00460a-9a42-4218-990f-1134d72c729e">
+      <field name="code" type="string" size="2" required="true" unique="true" primary="true" uuid="65c3c0a2-8e50-42aa-a934-b0efc6d2f75f">
+        <orm-attributes>
+          <attribute name="column">cc_fips</attribute>
+        </orm-attributes>
+      </field>
+      <field name="iso" type="string" size="2" required="true" uuid="77cd2d98-e83c-45eb-9cc0-9c789083cdc2">
+        <orm-attributes>
+          <attribute name="column">cc_iso</attribute>
+        </orm-attributes>
+      </field>
+      <field name="tld" type="string" size="3" required="true" uuid="8d8b5496-9b4c-4cf6-8275-71515e4b1c3e">
+        <orm-attributes>
+          <attribute name="column">tld</attribute>
+        </orm-attributes>
+      </field>
+      <field name="name" type="string" size="100" required="true" uuid="e4f4d077-db1e-4d31-83e9-8837e9967b60">
+        <orm-attributes>
+          <attribute name="column">country_name</attribute>
+        </orm-attributes>
+      </field>
+      <index name="idx_cc_fips">
+        <index-field name="code"/>
+      </index>
+      <index name="idx_cc_iso">
+        <index-field name="iso"/>
+      </index>
+      <orm-attributes>
+        <attribute name="schema">relation</attribute>
+        <attribute name="table">tr_country</attribute>
+        <attribute name="repository-class">App\Repository\CountryRepository</attribute>
+      </orm-attributes>
+    </entity>
+  </module>
+  <visual-data>
+    <association uuid="170c6e99-7668-4e9c-9e62-97c3ad2f27d4" caption1-position-x="-7" caption1-position-y="25" center-position-x="0" center-position-y="0" color="#969696"/>
+    <association uuid="1e901619-65f6-4cf1-a0c7-1f7f9cc819a2" caption1-position-x="8" caption1-position-y="54" center-position-x="0" center-position-y="0" color="#969696"/>
+    <association uuid="36137a85-baeb-4844-97ad-f5ea8656b811" caption1-position-x="-4" caption1-position-y="2" center-position-x="0" center-position-y="0" color="#969696"/>
+    <association uuid="3b9bd1e9-399e-4567-9fcd-281714b029d8" caption1-position-x="56" caption1-position-y="-3" center-position-x="0" center-position-y="-20" color="#969696"/>
+    <association uuid="51e5c0cf-ae9c-402a-ac46-b19cc6356c38" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
+    <association uuid="b956bc2e-bdd5-4678-a78c-30548b673a0b" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
+    <association uuid="bb43e5bf-0391-4bb6-9665-a321e350fca5" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
+    <association uuid="deea6ada-75cd-4e81-9dd7-ed34fa80a3cf" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
+    <association uuid="e48680c6-fe50-4b66-aaac-82d2eba12352" caption1-position-x="-54" caption1-position-y="-2" center-position-x="0" center-position-y="-20" color="#969696"/>
+    <entity uuid="103e99b6-7933-491d-bd87-4b38e96ae93c" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="2" position-y="94" size-x="0" size-x2="141" size-y="0" size-y2="199"/>
+    <entity uuid="39ad74d5-8a93-478c-bf15-0473b0ff7b04" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="321" position-y="132" size-x="0" size-x2="114" size-y="0" size-y2="157"/>
+    <entity uuid="8a00460a-9a42-4218-990f-1134d72c729e" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="591" position-y="213" size-x="0" size-x2="101" size-y="0" size-y2="73"/>
+    <entity uuid="b49b424d-0be5-498d-836f-c63cbeb3d8ac" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="437" position-y="-70" size-x="0" size-x2="144" size-y="0" size-y2="101"/>
+    <entity uuid="dd6aa6ca-e5ac-44e3-84f2-a3ff9d0e2db3" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="576" position-y="72" size-x="0" size-x2="125" size-y="0" size-y2="59"/>
+    <entity uuid="e3c81e1e-4ea2-4760-a344-588a9d4800ad" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="182" position-y="-81" size-x="0" size-x2="98" size-y="0" size-y2="59"/>
+    <module uuid="cae614d0-4dd4-4a17-a744-54b5459bc78f" bg-color="#E7F5FD" position-x="61" position-y="72" size-x="18" size-x2="734" size-y="94" size-y2="453"/>
+    <project uuid="e69bf476-ca30-4049-8c86-2100d8db7a16" size-x="-15" size-x2="845" size-y="72" size-y2="575"/>
+  </visual-data>
+</skipper>

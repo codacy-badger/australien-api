@@ -1,0 +1,98 @@
+App\App\Entity\Dog:
+  type: entity
+  schema: data
+  table: te_dog
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    birthday:
+      type: date
+      nullable: true
+    breeder:
+      type: text
+      nullable: true
+    deathday:
+      type: date
+      nullable: true
+    name:
+      type: string
+      length: 255
+      nullable: false
+    pedigreeNumber:
+      type: string
+      length: 32
+      nullable: true
+    sex:
+      type: boolean
+      nullable: true
+    sterilized:
+      type: boolean
+      nullable: false
+      options:
+        default: false
+    tatoo:
+      type: string
+      length: 16
+      nullable: true
+    hsf4:
+      type: integer
+      nullable: true
+    hsf4_gentest:
+      type: boolean
+      nullable: false
+      options:
+        default: false
+    cea:
+      type: integer
+      nullable: true
+    cea_gentest:
+      type: boolean
+      nullable: false
+      options:
+        default: false
+    pra:
+      type: integer
+      nullable: true
+    pra_gentest:
+      type: boolean
+      nullable: false
+      options:
+        default: false
+    mdr1:
+      type: integer
+      nullable: true
+    mdr1_gentest:
+      type: boolean
+      nullable: false
+      options:
+        default: false
+    hd:
+      type: integer
+      nullable: true
+    ed:
+      type: integer
+      nullable: true
+  oneToMany:
+    father:
+      targetEntity: App\App\Entity\Dog
+    mother:
+      targetEntity: App\App\Entity\Dog
+  manyToOne:
+    kennel:
+      targetEntity: App\App\Entity\Kennel
+      inversedBy: dogs
+      joinColumns:
+        kennel_id:
+          referencedColumnName: id
+    owner:
+      targetEntity: App\App\Entity\Person
+      inversedBy: dogs
+      joinColumns:
+        owner_id:
+          referencedColumnName: usr_id
+  Gedmo:
+    Tree:
+      Fields:

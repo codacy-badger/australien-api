@@ -1,0 +1,32 @@
+App\App\Entity\Kennel:
+  type: entity
+  repositoryClass: App\Repository\KennelRepository
+  schema: data
+  table: te_kennel
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    legalName:
+      type: text
+      nullable: false
+  oneToOne:
+    address:
+      targetEntity: App\App\Entity\Address
+      joinColumns:
+        address_id:
+          referencedColumnName: id
+          unique: true
+  oneToMany:
+    dogs:
+      targetEntity: App\App\Entity\Dog
+      mappedBy: kennel
+  manyToOne:
+    owner:
+      targetEntity: App\App\Entity\Person
+      inversedBy: kennel
+      joinColumns:
+        owner_id:
+          referencedColumnName: usr_id
