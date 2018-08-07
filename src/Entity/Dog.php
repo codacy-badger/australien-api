@@ -7,6 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace App\Entity;
 
 use DateTime;
@@ -26,7 +27,7 @@ class Dog
     private $id;
 
     /**
-     * Dog birthday
+     * Dog birthday.
      *
      * @var DateTime
      */
@@ -38,10 +39,9 @@ class Dog
     private $breeder;
 
     /**
-     * Dog deathday
+     * Dog deathday.
      *
      * @var bool
-     *
      */
     private $deathday;
 
@@ -49,15 +49,13 @@ class Dog
      * Dog name.
      *
      * @var string
-     *
      */
     private $name;
 
     /**
-     * Dog pedigree number
+     * Dog pedigree number.
      *
      * @var string
-     *
      */
     private $pedigreeNumber;
 
@@ -76,14 +74,14 @@ class Dog
     private $sterilized;
 
     /**
-     * Dog tatoo
+     * Dog tatoo.
      *
      * @var
      */
     private $tatoo;
 
     /**
-     * Health : HSF4
+     * Health : HSF4.
      *
      * 0: +/+
      * 1: +/-
@@ -101,7 +99,7 @@ class Dog
     private $hsf4_gentest;
 
     /**
-     * Health : CEA
+     * Health : CEA.
      *
      * 0: +/+
      * 1: +/-
@@ -114,7 +112,7 @@ class Dog
     private $cea_gentest;
 
     /**
-     * Health : PRA
+     * Health : PRA.
      *
      * 0: +/+
      * 1: +/-
@@ -132,7 +130,7 @@ class Dog
     private $pra_gentest;
 
     /**
-     * Health : MDR1
+     * Health : MDR1.
      *
      * 0: +/+
      * 1: +/-
@@ -150,7 +148,7 @@ class Dog
     private $mdr1_gentest;
 
     /**
-     * Health : hanche dysplasie
+     * Health : hanche dysplasie.
      *
      * 0: A
      * 1: B
@@ -162,7 +160,7 @@ class Dog
     private $hd;
 
     /**
-     * Health : ED
+     * Health : ED.
      *
      * 0: A
      * 1: B
@@ -181,7 +179,7 @@ class Dog
     private $father;
 
     /**
-     * Mother
+     * Mother.
      *
      * @var Dog
      */
@@ -195,7 +193,7 @@ class Dog
     private $kennel;
 
     /**
-     * Dog owner
+     * Dog owner.
      *
      * @var Person
      */
