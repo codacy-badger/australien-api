@@ -10,6 +10,7 @@
 
 namespace App\Entity;
 
+use App\Exception\SexException;
 use DateTime;
 
 /**
@@ -19,10 +20,30 @@ use DateTime;
  */
 class Dog
 {
+    const FEMALE = false;
+
+    const MALE = true;
+
+    const UNKNOWN = null;
+
+    const PLUSPLUS = 0;
+
+    const PLUSMOINS = 1;
+
+    const MOINSMOINS = 2;
+
+    const A = 0;
+
+    const B = 1;
+
+    const C = 2;
+
+    const D = 3;
+
     /**
      * Dog id.
      *
-     * @var
+     * @var int
      */
     private $id;
 
@@ -34,14 +55,16 @@ class Dog
     private $birthday;
 
     /**
-     * @var
+     * Dog breeder.
+     *
+     * @var string
      */
     private $breeder;
 
     /**
      * Dog deathday.
      *
-     * @var bool
+     * @var DateTime
      */
     private $deathday;
 
@@ -62,6 +85,8 @@ class Dog
     /**
      * Dog sex.
      *
+     * self::MALE or self::FEMALE or null for UNKNOWN
+     *
      * @var bool
      */
     private $sex;
@@ -71,12 +96,12 @@ class Dog
      *
      * @var bool
      */
-    private $sterilized;
+    private $sterilized = false;
 
     /**
      * Dog tatoo.
      *
-     * @var
+     * @var string
      */
     private $tatoo;
 
@@ -96,7 +121,7 @@ class Dog
      *
      * @var bool
      */
-    private $hsf4_gentest;
+    private $hsf4_geneticTested = false;
 
     /**
      * Health : CEA.
@@ -109,7 +134,12 @@ class Dog
      */
     private $cea;
 
-    private $cea_gentest;
+    /**
+     * Genetic test done to know CEA results.
+     *
+     * @var bool
+     */
+    private $cea_geneticTested = false;
 
     /**
      * Health : PRA.
@@ -123,11 +153,11 @@ class Dog
     private $pra;
 
     /**
-     * Genetic test to have PRA results.
+     * Genetic test done to know PRA results.
      *
      * @var bool
      */
-    private $pra_gentest;
+    private $pra_geneticTested = false;
 
     /**
      * Health : MDR1.
@@ -141,11 +171,11 @@ class Dog
     private $mdr1;
 
     /**
-     * Genetic test to have MDR1 results.
+     * Genetic test done to know MDR1 results.
      *
      * @var bool
      */
-    private $mdr1_gentest;
+    private $mdr1_geneticTested = false;
 
     /**
      * Health : hanche dysplasie.
@@ -198,4 +228,629 @@ class Dog
      * @var Person
      */
     private $owner;
+
+    /**
+     * Are health of these dogs compatible?
+     *
+     * @param Dog $dog
+     *
+     * @return bool
+     */
+    public function areHealthCompatible(Dog $dog): bool
+    {
+        return $this->areMdr1Compatible($dog)
+            && $this->areHsf4Compatible($dog)
+            && $this->arePraCompatible($dog)
+            && $this->areCeaCompatible($dog)
+            && $this->areHdCompatible($dog)
+            && $this->areEdCompatible($dog);
+    }
+
+    /**
+     * Can this dog have children?
+     *
+     * @return bool
+     */
+    public function canHaveNewChildren(): bool
+    {
+        return !$this->isSterilized() && !$this->isDead();
+    }
+
+    /**
+     * Can this dog have safe children with provided dog?
+     *
+     * @param Dog
+     *
+     * @return bool
+     */
+    public function canHaveSafeChildrenWith(Dog $dog): bool
+    {
+        return $this->canHaveNewChildren()
+            && $dog->canHaveNewChildren()
+            && $this->areSexOpposed($dog)
+            && $this->areHealthCompatible($dog);
+    }
+
+    /**
+     * Dog ID getter.
+     *
+     * @return int
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * Dog getter.
+     *
+     * @return DateTime
+     */
+    public function getBirthday(): ?DateTime
+    {
+        return $this->birthday;
+    }
+
+    /**
+     * Dog breeder getter.
+     *
+     * @return string
+     */
+    public function getBreeder(): ?string
+    {
+        return $this->breeder;
+    }
+
+    /**
+     * Dog deathday getter.
+     *
+     * @return DateTime
+     */
+    public function getDeathday(): ?DateTime
+    {
+        return $this->deathday;
+    }
+
+    /**
+     * Dog name getter.
+     *
+     * @return string
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * Dog pedigree number getter.
+     *
+     * @return string
+     */
+    public function getPedigreeNumber(): ?string
+    {
+        return $this->pedigreeNumber;
+    }
+
+    /**
+     * Is this dog dead?
+     *
+     * @return bool
+     */
+    public function isDead(): bool
+    {
+        return null !== $this->deathday;
+    }
+
+    /**
+     * Is this dog a female?
+     *
+     * @return bool
+     */
+    public function isFemale(): bool
+    {
+        return self::FEMALE === $this->sex;
+    }
+
+    /**
+     * Is this dog a male?
+     *
+     * @return bool
+     */
+    public function isMale(): bool
+    {
+        return self::MALE === $this->sex;
+    }
+
+    /**
+     * Is the sex of this dog known?
+     *
+     * @return bool
+     */
+    public function isSexUnknown(): bool
+    {
+        return self::UNKNOWN === $this->sex;
+    }
+
+    /**
+     * Is this dog sterilized.
+     *
+     * @return bool
+     */
+    public function isSterilized(): bool
+    {
+        return $this->sterilized;
+    }
+
+    /**
+     * Dog tatoo getter.
+     *
+     * @return string
+     */
+    public function getTatoo(): ?string
+    {
+        return $this->tatoo;
+    }
+
+    /**
+     * Dog HSF4 getter.
+     *
+     * @return int
+     */
+    public function getHsf4(): ?int
+    {
+        return $this->hsf4;
+    }
+
+    /**
+     * Dog HSF4 genetic test getter.
+     *
+     * @return bool
+     */
+    public function isHsf4GeneticTested(): bool
+    {
+        return $this->hsf4_geneticTested;
+    }
+
+    /**
+     * Dog CEA getter.
+     *
+     * @return int
+     */
+    public function getCea(): ?int
+    {
+        return $this->cea;
+    }
+
+    /**
+     * Dog CEA genetic test getter.
+     *
+     * @return bool
+     */
+    public function isCeaGeneticTested()
+    {
+        return $this->cea_geneticTested;
+    }
+
+    /**
+     * Dog PRA getter.
+     *
+     * @return int
+     */
+    public function getPra(): ?int
+    {
+        return $this->pra;
+    }
+
+    /**
+     * Dog PRA genetic test getter.
+     *
+     * @return bool
+     */
+    public function isPraGeneticTested(): bool
+    {
+        return $this->pra_geneticTested;
+    }
+
+    /**
+     * Dog MDR1 getter.
+     *
+     * @return int
+     */
+    public function getMdr1(): ?int
+    {
+        return $this->mdr1;
+    }
+
+    /**
+     * Dog MDR1 genetic test getter.
+     *
+     * @return bool
+     */
+    public function isMdr1GeneticTested(): bool
+    {
+        return $this->mdr1_geneticTested;
+    }
+
+    /**
+     * Dog HD getter.
+     *
+     * @return int
+     */
+    public function getHd(): ?int
+    {
+        return $this->hd;
+    }
+
+    /**
+     * Dog ED getter.
+     *
+     * @return int
+     */
+    public function getEd(): ?int
+    {
+        return $this->ed;
+    }
+
+    /**
+     * Dog father getter.
+     *
+     * @return Dog
+     */
+    public function getFather(): ?Dog
+    {
+        return $this->father;
+    }
+
+    /**
+     * Dog getter.
+     *
+     * @return Dog
+     */
+    public function getMother(): ?Dog
+    {
+        return $this->mother;
+    }
+
+    /**
+     * Dog kennel getter.
+     *
+     * @return Kennel
+     */
+    public function getKennel(): ?Kennel
+    {
+        return $this->kennel;
+    }
+
+    /**
+     * Dog owner getter.
+     *
+     * @return Person
+     */
+    public function getOwner(): ?Person
+    {
+        return $this->owner;
+    }
+
+    /**
+     * Dog birthday setter.
+     *
+     * @param DateTime $birthday
+     */
+    public function setBirthday(DateTime $birthday): void
+    {
+        $this->birthday = $birthday;
+    }
+
+    /**
+     * Dog breeder setter.
+     *
+     * @param string $breeder
+     */
+    public function setBreeder(string $breeder): void
+    {
+        $this->breeder = $breeder;
+    }
+
+    /**
+     * Dog death day setter.
+     *
+     * @param DateTime $deathday
+     */
+    public function setDeathday(DateTime $deathday): void
+    {
+        $this->deathday = $deathday;
+    }
+
+    /**
+     * Dog name setter.
+     *
+     * @param string $name
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * Dog pedigree number setter.
+     *
+     * @param string $pedigreeNumber
+     */
+    public function setPedigreeNumber(string $pedigreeNumber): void
+    {
+        $this->pedigreeNumber = $pedigreeNumber;
+    }
+
+    /**
+     * Dog sex setter.
+     *
+     * @param bool $sex
+     */
+    public function setSex(bool $sex): void
+    {
+        $this->sex = $sex;
+    }
+
+    /**
+     * Dog sterilized setter.
+     *
+     * @param bool $sterilized
+     */
+    public function setSterilized(bool $sterilized = true): void
+    {
+        $this->sterilized = $sterilized;
+    }
+
+    /**
+     * Dog tatoo setter.
+     *
+     * @param string $tatoo
+     */
+    public function setTatoo(string $tatoo): void
+    {
+        $this->tatoo = $tatoo;
+    }
+
+    /**
+     * Dog Hsf4 setter.
+     *
+     * @param int $hsf4
+     */
+    public function setHsf4(int $hsf4): void
+    {
+        $this->hsf4 = $hsf4;
+    }
+
+    /**
+     * Dog HSF4 genetic test setter.
+     *
+     * @param bool $hsf4_geneticTested
+     */
+    public function setHsf4GeneticTested(bool $hsf4_geneticTested = true): void
+    {
+        $this->hsf4_geneticTested = $hsf4_geneticTested;
+    }
+
+    /**
+     * Dog CEA setter.
+     *
+     * @param int $cea
+     */
+    public function setCea(int $cea): void
+    {
+        $this->cea = $cea;
+    }
+
+    /**
+     * Dog Cea genetic test setter.
+     *
+     * @param bool $cea_geneticTested
+     */
+    public function setCeaGeneticTested(bool $cea_geneticTested = true): void
+    {
+        $this->cea_geneticTested = $cea_geneticTested;
+    }
+
+    /**
+     * Dog PRA setter.
+     *
+     * @param int $pra
+     */
+    public function setPra(int $pra): void
+    {
+        $this->pra = $pra;
+    }
+
+    /**
+     * Dog Pra genetic test setter.
+     *
+     * @param bool $pra_geneticTested
+     */
+    public function setPraGeneticTested(bool $pra_geneticTested = true): void
+    {
+        $this->pra_geneticTested = $pra_geneticTested;
+    }
+
+    /**
+     * Dog MDR1 setter.
+     *
+     * @param int $mdr1
+     */
+    public function setMdr1(int $mdr1): void
+    {
+        $this->mdr1 = $mdr1;
+    }
+
+    /**
+     * Dog MDR1 genetic test setter.
+     *
+     * @param bool $mdr1_geneticTested
+     */
+    public function setMdr1GeneticTested(bool $mdr1_geneticTested = true): void
+    {
+        $this->mdr1_geneticTested = $mdr1_geneticTested;
+    }
+
+    /**
+     * Dog Hd setter.
+     *
+     * @param int $hd
+     */
+    public function setHd(int $hd): void
+    {
+        $this->hd = $hd;
+    }
+
+    /**
+     * Dog Ed setter.
+     *
+     * @param int $ed
+     */
+    public function setEd(int $ed): void
+    {
+        $this->ed = $ed;
+    }
+
+    /**
+     * Dog father setter.
+     *
+     * @param Dog $father
+     *
+     * @throws SexException
+     */
+    public function setFather(Dog $father): void
+    {
+        if (!$father->isMale()) {
+            throw new SexException('Father must be a male');
+        }
+        $this->father = $father;
+    }
+
+    /**
+     * Dog mother setter.
+     *
+     * @param Dog $mother
+     *
+     * @throws SexException
+     */
+    public function setMother(Dog $mother): void
+    {
+        if (!$mother->isFemale()) {
+            throw new SexException('Mother must be a female');
+        }
+        $this->mother = $mother;
+    }
+
+    /**
+     * Dog kennel setter.
+     *
+     * @param Kennel $kennel
+     */
+    public function setKennel(Kennel $kennel): void
+    {
+        $this->kennel = $kennel;
+    }
+
+    /**
+     * Dog owner setter.
+     *
+     * @param Person $owner
+     */
+    public function setOwner(Person $owner): void
+    {
+        $this->owner = $owner;
+    }
+
+    /**
+     * Unset the deathday of the dog.
+     */
+    public function unsetDeathday(): void
+    {
+        $this->deathday = null;
+    }
+
+    /**
+     * Are these dogs MDR1 compatible?
+     *
+     * @param Dog $dog
+     *
+     * @return bool
+     */
+    private function areMdr1Compatible(Dog $dog): bool
+    {
+        return 2 > $this->getMdr1() + $dog->getMdr1();
+    }
+
+    /**
+     * Are these dogs CEA compatible?
+     *
+     * @param Dog $dog
+     *
+     * @return bool
+     */
+    private function areCeaCompatible(Dog $dog): bool
+    {
+        return 2 > $this->getCea() + $dog->getCea();
+    }
+
+    /**
+     * Are these dogs PRA compatible?
+     *
+     * @param Dog $dog
+     *
+     * @return bool
+     */
+    private function arePraCompatible(Dog $dog): bool
+    {
+        return 2 > $this->getPra() + $dog->getPra();
+    }
+
+    /**
+     * Are these dogs HSF4 compatible?
+     *
+     * @param Dog $dog
+     *
+     * @return bool
+     */
+    private function areHsf4Compatible(Dog $dog): bool
+    {
+        return 2 > $this->getHsf4() + $dog->getHsf4();
+    }
+
+    /**
+     * Are these dogs ED compatible?
+     *
+     * @param Dog $dog
+     *
+     * @return bool
+     */
+    private function areEdCompatible(Dog $dog): bool
+    {
+        return 3 > $this->getEd() + $dog->getEd();
+    }
+
+    /**
+     * Are these dogs HD compatible?
+     *
+     * @param Dog $dog
+     *
+     * @return bool
+     */
+    private function areHdCompatible(Dog $dog): bool
+    {
+        return 3 > $this->getHd() + $dog->getHd();
+    }
+
+    /**
+     * Is there a male and a female.
+     *
+     * @param Dog $dog
+     *
+     * @return bool
+     */
+    private function areSexOpposed(Dog $dog): bool
+    {
+        return $this->isMale() && $dog->isFemale()
+            || $this->isFemale() && $dog->isMale();
+    }
 }
