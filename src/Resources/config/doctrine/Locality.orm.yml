@@ -17,10 +17,9 @@ App\Entity\Locality:
     geometry:
       type: geometry
       nullable: true
-  oneToOne:
+  manyToOne:
     country:
       targetEntity: App\Entity\Country
       joinColumns:
         cc_fips:
           referencedColumnName: cc_fips
-          unique: true

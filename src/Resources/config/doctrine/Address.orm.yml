@@ -24,10 +24,9 @@ App\Entity\Address:
     geometry:
       type: geometry
       nullable: true
-  oneToOne:
+  manyToOne:
     locality:
       targetEntity: App\Entity\Locality
       joinColumns:
         locality_id:
           referencedColumnName: id
-          unique: true

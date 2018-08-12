@@ -4,8 +4,6 @@
     <entity name="\App\Entity\Dog" local-name="Dog" namespace="\App\Entity" local-namespace="Entity" uuid="103e99b6-7933-491d-bd87-4b38e96ae93c">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="ece6dca6-0afc-4dd7-9565-55655d632f5a"/>
       <field name="kennel_id" type="integer" uuid="1691cf74-368f-43d8-9f9b-b97c78d478ef"/>
-      <field name="father_id" type="integer" uuid="f53184f7-3491-4b40-8cb7-40858e872481"/>
-      <field name="mother_id" type="integer" uuid="fb1240a5-9551-4a04-8407-061b31e5470c"/>
       <field name="owner_id" type="integer" uuid="758e838b-ad99-494b-b1a9-64b8b4ab1479"/>
       <field name="birthday" type="date" uuid="7660448d-0c60-47db-b471-0789a8833830"/>
       <field name="breeder" type="text" uuid="add0fcab-4b05-43c3-b293-2b2570243b6d"/>
@@ -16,15 +14,17 @@
       <field name="sterilized" type="boolean" default="false" required="true" uuid="03943490-7c37-48dc-880f-6549fb51dbec"/>
       <field name="tatoo" type="string" size="16" uuid="ae3af14d-070b-49da-9653-e437c5279d2a"/>
       <field name="hsf4" type="integer" uuid="9e59d611-44fc-4388-96b7-aa3ee27cc890"/>
-      <field name="hsf4_gentest" type="boolean" default="false" required="true" uuid="00b8fa6d-d17e-4328-b6ad-e4fe3ecb0538"/>
+      <field name="hsf4_geneticTested" type="boolean" default="false" required="true" uuid="00b8fa6d-d17e-4328-b6ad-e4fe3ecb0538"/>
       <field name="cea" type="integer" uuid="9aa5ef01-d967-49c5-907c-48366fa96c4a"/>
-      <field name="cea_gentest" type="boolean" default="false" required="true" uuid="8c7032fb-8442-4eb9-b8b7-ae52c25a4730"/>
+      <field name="cea_geneticTested" type="boolean" default="false" required="true" uuid="8c7032fb-8442-4eb9-b8b7-ae52c25a4730"/>
       <field name="pra" type="integer" uuid="0c2b9695-bbf7-40f8-9bb6-68ca448825eb"/>
-      <field name="pra_gentest" type="boolean" default="false" required="true" uuid="974db2ad-d946-4b53-80e3-225f402f8828"/>
+      <field name="pra_geneticTested" type="boolean" default="false" required="true" uuid="974db2ad-d946-4b53-80e3-225f402f8828"/>
       <field name="mdr1" type="integer" uuid="fc2c9774-0927-4742-b517-b2a539976b25"/>
-      <field name="mdr1_gentest" type="boolean" default="false" required="true" uuid="38272923-6656-4ec6-9343-32a5142a42fa"/>
+      <field name="mdr1_geneticTested" type="boolean" default="false" required="true" uuid="38272923-6656-4ec6-9343-32a5142a42fa"/>
       <field name="hd" description="hanche displasie" type="integer" uuid="04c4c3e8-38fe-46b9-a87c-70d131b2a47a"/>
       <field name="ed" description="e????" type="integer" uuid="a94ffb69-c558-4d9a-8a28-d2760b60dc38"/>
+      <field name="father_id" type="integer" uuid="cd037da7-5a55-4c9d-b46c-869e145f13f3"/>
+      <field name="mother_id" type="integer" uuid="0cd591bb-5885-4d50-822f-ee030e4f8248"/>
       <orm-attributes>
         <attribute name="Gedmo">
           <attribute name="Tree">
@@ -37,17 +37,17 @@
         <attribute name="table">te_dog</attribute>
       </orm-attributes>
     </entity>
-    <association from="\App\Entity\Dog" to="\App\Entity\Dog" caption="Father" owner-alias="father" many-owner="true" many-inverse="false" uuid="3b9bd1e9-399e-4567-9fcd-281714b029d8">
-      <association-field from="father_id" to="id"/>
-    </association>
-    <association from="\App\Entity\Dog" to="\App\Entity\Dog" caption="Mother" owner-alias="mother" many-owner="true" many-inverse="false" uuid="e48680c6-fe50-4b66-aaac-82d2eba12352">
-      <association-field from="mother_id" to="id"/>
-    </association>
     <association from="\App\Entity\Dog" to="\App\Entity\Kennel" caption="Kennel Dog" owner-alias="dogs" inverse-alias="kennel" many-owner="true" many-inverse="false" uuid="170c6e99-7668-4e9c-9e62-97c3ad2f27d4">
       <association-field from="kennel_id" to="id"/>
     </association>
     <association from="\App\Entity\Dog" to="\App\Entity\Person" caption="Owner" owner-alias="dogs" inverse-alias="owner" many-owner="true" many-inverse="false" uuid="36137a85-baeb-4844-97ad-f5ea8656b811">
       <association-field from="owner_id" to="id"/>
+    </association>
+    <association from="\App\Entity\Dog" to="\App\Entity\Dog" caption="Father" inverse-alias="father" many-owner="true" many-inverse="false" uuid="1464dc32-f3bc-48bb-a7fe-e383ca4dabe4">
+      <association-field from="father_id" to="id"/>
+    </association>
+    <association from="\App\Entity\Dog" to="\App\Entity\Dog" caption="Mother" inverse-alias="mother" many-owner="true" many-inverse="false" uuid="f3fa856a-abd9-452f-a26f-a6353380a3b6">
+      <association-field from="mother_id" to="id"/>
     </association>
     <entity name="\App\Entity\Kennel" local-name="Kennel" namespace="\App\Entity" local-namespace="Entity" uuid="e3c81e1e-4ea2-4760-a344-588a9d4800ad">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="3b6a58bd-37a7-4f47-aa53-a2e465f2195a"/>
@@ -130,7 +130,7 @@
     </association>
     <entity name="\App\Entity\Address" local-name="Address" namespace="\App\Entity" local-namespace="Entity" uuid="b49b424d-0be5-498d-836f-c63cbeb3d8ac">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="8c583030-be78-4541-9788-ae4136e8059c"/>
-      <field name="locality_id" type="integer" unique="true" uuid="f4104963-59d3-4d18-acd2-bf524bb40e3e"/>
+      <field name="locality_id" type="integer" uuid="f4104963-59d3-4d18-acd2-bf524bb40e3e"/>
       <field name="region" type="text" uuid="c1f601d1-23f8-4e46-8345-0168fad71985"/>
       <field name="postOfficeBoxNumber" type="text" uuid="1b59a2cb-9e91-4f9c-84b5-afb87bc6d4c2"/>
       <field name="postalCode" type="text" uuid="191ec5b8-c895-488d-8376-29d88305a4cf"/>
@@ -142,7 +142,7 @@
         <attribute name="table">te_address</attribute>
       </orm-attributes>
     </entity>
-    <association from="\App\Entity\Address" to="\App\Entity\Locality" caption="Locality Address" inverse-alias="locality" many-owner="false" many-inverse="false" uuid="bb43e5bf-0391-4bb6-9665-a321e350fca5">
+    <association from="\App\Entity\Address" to="\App\Entity\Locality" caption="Locality Address" inverse-alias="locality" many-owner="true" many-inverse="false" uuid="bb43e5bf-0391-4bb6-9665-a321e350fca5">
       <association-field from="locality_id" to="id"/>
     </association>
     <entity name="\App\Entity\Locality" local-name="Locality" namespace="\App\Entity" local-namespace="Entity" uuid="dd6aa6ca-e5ac-44e3-84f2-a3ff9d0e2db3">
@@ -152,7 +152,7 @@
           <attribute name="column">full_name_nd</attribute>
         </orm-attributes>
       </field>
-      <field name="country_code" type="string" size="2" unique="true" uuid="332f23e7-cbc3-4c4b-8eeb-e3674d143877">
+      <field name="country_code" type="string" size="2" uuid="332f23e7-cbc3-4c4b-8eeb-e3674d143877">
         <orm-attributes>
           <attribute name="column">cc_fips</attribute>
         </orm-attributes>
@@ -164,7 +164,7 @@
         <attribute name="table">te_locality</attribute>
       </orm-attributes>
     </entity>
-    <association from="\App\Entity\Locality" to="\App\Entity\Country" caption="Country Locality" inverse-alias="country" many-owner="false" many-inverse="false" uuid="b956bc2e-bdd5-4678-a78c-30548b673a0b">
+    <association from="\App\Entity\Locality" to="\App\Entity\Country" caption="Country Locality" inverse-alias="country" many-owner="true" many-inverse="false" uuid="b956bc2e-bdd5-4678-a78c-30548b673a0b">
       <association-field from="country_code" to="code"/>
     </association>
     <entity name="\App\Entity\Country" local-name="Country" namespace="\App\Entity" local-namespace="Entity" uuid="8a00460a-9a42-4218-990f-1134d72c729e">
@@ -206,20 +206,20 @@
     </orm-attributes>
   </module>
   <visual-data>
+    <association uuid="1464dc32-f3bc-48bb-a7fe-e383ca4dabe4" caption1-position-x="17" caption1-position-y="-12" center-position-x="0" center-position-y="-20" color="#969696"/>
     <association uuid="170c6e99-7668-4e9c-9e62-97c3ad2f27d4" caption1-position-x="-7" caption1-position-y="25" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="1e901619-65f6-4cf1-a0c7-1f7f9cc819a2" caption1-position-x="8" caption1-position-y="54" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="36137a85-baeb-4844-97ad-f5ea8656b811" caption1-position-x="-4" caption1-position-y="2" center-position-x="0" center-position-y="0" color="#969696"/>
-    <association uuid="3b9bd1e9-399e-4567-9fcd-281714b029d8" caption1-position-x="3" caption1-position-y="-11" center-position-x="0" center-position-y="-20" color="#969696"/>
     <association uuid="51e5c0cf-ae9c-402a-ac46-b19cc6356c38" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="b956bc2e-bdd5-4678-a78c-30548b673a0b" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="bb43e5bf-0391-4bb6-9665-a321e350fca5" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="deea6ada-75cd-4e81-9dd7-ed34fa80a3cf" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
-    <association uuid="e48680c6-fe50-4b66-aaac-82d2eba12352" caption1-position-x="4" caption1-position-y="-29" center-position-x="0" center-position-y="-20" color="#969696"/>
+    <association uuid="f3fa856a-abd9-452f-a26f-a6353380a3b6" caption1-position-x="-20" caption1-position-y="-15" center-position-x="0" center-position-y="-20" color="#969696"/>
     <entity uuid="103e99b6-7933-491d-bd87-4b38e96ae93c" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="2" position-y="94" size-x="0" size-x2="141" size-y="0" size-y2="199"/>
     <entity uuid="39ad74d5-8a93-478c-bf15-0473b0ff7b04" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="321" position-y="130" size-x="0" size-x2="114" size-y="0" size-y2="157"/>
     <entity uuid="8a00460a-9a42-4218-990f-1134d72c729e" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="591" position-y="213" size-x="0" size-x2="101" size-y="0" size-y2="73"/>
     <entity uuid="b49b424d-0be5-498d-836f-c63cbeb3d8ac" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="437" position-y="-70" size-x="0" size-x2="144" size-y="0" size-y2="101"/>
-    <entity uuid="dd6aa6ca-e5ac-44e3-84f2-a3ff9d0e2db3" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="576" position-y="72" size-x="0" size-x2="125" size-y="0" size-y2="59"/>
+    <entity uuid="dd6aa6ca-e5ac-44e3-84f2-a3ff9d0e2db3" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="584" position-y="76" size-x="0" size-x2="125" size-y="0" size-y2="73"/>
     <entity uuid="e3c81e1e-4ea2-4760-a344-588a9d4800ad" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="182" position-y="-81" size-x="0" size-x2="98" size-y="0" size-y2="59"/>
     <module uuid="cae614d0-4dd4-4a17-a744-54b5459bc78f" bg-color="#E7F5FD" position-x="61" position-y="72" size-x="18" size-x2="734" size-y="94" size-y2="453"/>
     <project uuid="e69bf476-ca30-4049-8c86-2100d8db7a16" size-x="-15" size-x2="845" size-y="72" size-y2="575"/>

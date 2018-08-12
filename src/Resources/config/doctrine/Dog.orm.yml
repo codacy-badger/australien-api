@@ -40,7 +40,7 @@ App\Entity\Dog:
     hsf4:
       type: integer
       nullable: true
-    hsf4_gentest:
+    hsf4_geneticTested:
       type: boolean
       nullable: false
       options:
@@ -48,7 +48,7 @@ App\Entity\Dog:
     cea:
       type: integer
       nullable: true
-    cea_gentest:
+    cea_geneticTested:
       type: boolean
       nullable: false
       options:
@@ -56,7 +56,7 @@ App\Entity\Dog:
     pra:
       type: integer
       nullable: true
-    pra_gentest:
+    pra_geneticTested:
       type: boolean
       nullable: false
       options:
@@ -64,7 +64,7 @@ App\Entity\Dog:
     mdr1:
       type: integer
       nullable: true
-    mdr1_gentest:
+    mdr1_geneticTested:
       type: boolean
       nullable: false
       options:
@@ -75,11 +75,6 @@ App\Entity\Dog:
     ed:
       type: integer
       nullable: true
-  oneToMany:
-    father:
-      targetEntity: App\Entity\Dog
-    mother:
-      targetEntity: App\Entity\Dog
   manyToOne:
     kennel:
       targetEntity: App\Entity\Kennel
@@ -93,6 +88,16 @@ App\Entity\Dog:
       joinColumns:
         owner_id:
           referencedColumnName: usr_id
+    father:
+      targetEntity: App\Entity\Dog
+      joinColumns:
+        father_id:
+          referencedColumnName: id
+    mother:
+      targetEntity: App\Entity\Dog
+      joinColumns:
+        mother_id:
+          referencedColumnName: id
   Gedmo:
     Tree:
       Fields:
