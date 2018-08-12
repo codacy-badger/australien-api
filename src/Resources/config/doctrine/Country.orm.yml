@@ -24,6 +24,9 @@ App\Entity\Country:
       length: 100
       nullable: false
       column: country_name
+    geometry:
+      type: geometry
+      nullable: true
   indexes:
     idx_cc_fips:
       columns: [cc_fips]

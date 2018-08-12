@@ -15,8 +15,13 @@ namespace App\Entity;
  *
  * Description.
  */
-class Country
+class Country implements SpatialInterface
 {
+    /*
+     * Geometry trait implements geometry interface.
+     */
+    use SpatialTrait;
+
     /**
      * Code of country.
      *

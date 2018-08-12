@@ -12,6 +12,7 @@ namespace App\Tests\Entity;
 
 use App\Entity\Address;
 use App\Entity\Locality;
+use CrEOF\Spatial\PHP\Types\Geometry\Point;
 use PHPUnit\Framework\TestCase;
 
 class AddressTest extends TestCase
@@ -37,6 +38,7 @@ class AddressTest extends TestCase
     public function testConstructor()
     {
         self::assertNull($this->address->getId());
+        self::assertNull($this->address->getGeometry());
         self::assertNull($this->address->getLocality());
         self::assertNull($this->address->getPostalCode());
         self::assertNull($this->address->getPostOfficeBoxNumber());
@@ -64,6 +66,17 @@ class AddressTest extends TestCase
 
         $this->address->setLocality($locality);
         self::assertEquals($locality, $this->address->getLocality());
+    }
+
+    /**
+     * Test geometry setter and getter.
+     */
+    public function testGeometry()
+    {
+        $geometry = new Point(1, 1);
+
+        $this->address->setGeometry($geometry);
+        self::assertEquals($geometry, $this->address->getGeometry());
     }
 
     /**

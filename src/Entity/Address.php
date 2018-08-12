@@ -15,8 +15,13 @@ namespace App\Entity;
  *
  * Description.
  */
-class Address
+class Address implements SpatialInterface
 {
+    /*
+     * Geometry trait implements geometry interface.
+     */
+    use SpatialTrait;
+
     /**
      * Entity id.
      *

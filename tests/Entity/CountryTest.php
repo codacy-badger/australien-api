@@ -11,6 +11,7 @@
 namespace App\Tests\Entity;
 
 use App\Entity\Country;
+use CrEOF\Spatial\PHP\Types\Geometry\Point;
 use PHPUnit\Framework\TestCase;
 
 class CountryTest extends TestCase
@@ -36,6 +37,7 @@ class CountryTest extends TestCase
     public function testConstructor()
     {
         self::assertNull($this->country->getCode());
+        self::assertNull($this->country->getGeometry());
         self::assertNull($this->country->getIso());
         self::assertNull($this->country->getTld());
         self::assertNull($this->country->getName());
@@ -50,6 +52,17 @@ class CountryTest extends TestCase
 
         $this->country->setCode($code);
         self::assertEquals($code, $this->country->getCode());
+    }
+
+    /**
+     * Test geometry setter and getter.
+     */
+    public function testGeometry()
+    {
+        $geometry = new Point(1, 1);
+
+        $this->country->setGeometry($geometry);
+        self::assertEquals($geometry, $this->country->getGeometry());
     }
 
     /**

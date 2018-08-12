@@ -14,6 +14,9 @@ App\Entity\Locality:
       length: 200
       nullable: false
       column: full_name_nd
+    geometry:
+      type: geometry
+      nullable: true
   oneToOne:
     country:
       targetEntity: App\Entity\Country

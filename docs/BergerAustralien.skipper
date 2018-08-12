@@ -51,9 +51,9 @@
     </association>
     <entity name="\App\Entity\Kennel" local-name="Kennel" namespace="\App\Entity" local-namespace="Entity" uuid="e3c81e1e-4ea2-4760-a344-588a9d4800ad">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="3b6a58bd-37a7-4f47-aa53-a2e465f2195a"/>
-      <field name="legalName" type="text" required="true" uuid="445e0adf-1d56-4f84-b5d3-29f41f262f70"/>
-      <field name="owner_id" type="integer" uuid="fa124f72-7f59-4ff5-80f6-8a4e038ce5ae"/>
       <field name="address_id" type="integer" unique="true" uuid="dbe73fe6-0fd7-4dd6-aaf4-788017e8a514"/>
+      <field name="owner_id" type="integer" uuid="fa124f72-7f59-4ff5-80f6-8a4e038ce5ae"/>
+      <field name="legalName" type="text" required="true" uuid="445e0adf-1d56-4f84-b5d3-29f41f262f70"/>
       <orm-attributes>
         <attribute name="repository-class">App\Repository\KennelRepository</attribute>
         <attribute name="schema">data</attribute>
@@ -72,6 +72,7 @@
           <attribute name="column">usr_id</attribute>
         </orm-attributes>
       </field>
+      <field name="address_id" type="integer" unique="true" uuid="a2c8cd44-c095-4bcb-abbf-031f8b5f727a"/>
       <field name="additionalName" type="text" uuid="98bd9f59-9aa7-44ab-9957-d02221c0eed6">
         <orm-attributes>
           <attribute name="column">usr_additional_name</attribute>
@@ -112,7 +113,6 @@
           <attribute name="column">usr_active</attribute>
         </orm-attributes>
       </field>
-      <field name="address_id" type="integer" unique="true" uuid="a2c8cd44-c095-4bcb-abbf-031f8b5f727a"/>
       <index name="uk_usr_email" unique="true">
         <index-field name="email"/>
       </index>
@@ -130,11 +130,12 @@
     </association>
     <entity name="\App\Entity\Address" local-name="Address" namespace="\App\Entity" local-namespace="Entity" uuid="b49b424d-0be5-498d-836f-c63cbeb3d8ac">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="8c583030-be78-4541-9788-ae4136e8059c"/>
+      <field name="locality_id" type="integer" unique="true" uuid="f4104963-59d3-4d18-acd2-bf524bb40e3e"/>
       <field name="region" type="text" uuid="c1f601d1-23f8-4e46-8345-0168fad71985"/>
       <field name="postOfficeBoxNumber" type="text" uuid="1b59a2cb-9e91-4f9c-84b5-afb87bc6d4c2"/>
       <field name="postalCode" type="text" uuid="191ec5b8-c895-488d-8376-29d88305a4cf"/>
       <field name="streetAddress" type="text" uuid="348ae7e5-4653-474f-92c5-af27ac662529"/>
-      <field name="locality_id" type="integer" unique="true" uuid="f4104963-59d3-4d18-acd2-bf524bb40e3e"/>
+      <field name="geometry" type="geometry" uuid="328f4c91-a4ff-4a99-be21-f63f6a2e4c3f"/>
       <orm-attributes>
         <attribute name="repository-class">App\Repository\Address</attribute>
         <attribute name="schema">data</attribute>
@@ -156,6 +157,7 @@
           <attribute name="column">cc_fips</attribute>
         </orm-attributes>
       </field>
+      <field name="geometry" type="geometry" uuid="a5d3139b-7e21-474e-af61-eb1a2ae65ca0"/>
       <orm-attributes>
         <attribute name="repository-class">App\Repository\LocalityRepository</attribute>
         <attribute name="schema">relation</attribute>
@@ -186,6 +188,7 @@
           <attribute name="column">country_name</attribute>
         </orm-attributes>
       </field>
+      <field name="geometry" type="geometry" uuid="4b58aeab-9b75-4b97-abec-20dfaf58b1eb"/>
       <index name="idx_cc_fips">
         <index-field name="code"/>
       </index>
@@ -213,9 +216,9 @@
     <association uuid="deea6ada-75cd-4e81-9dd7-ed34fa80a3cf" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="e48680c6-fe50-4b66-aaac-82d2eba12352" caption1-position-x="4" caption1-position-y="-29" center-position-x="0" center-position-y="-20" color="#969696"/>
     <entity uuid="103e99b6-7933-491d-bd87-4b38e96ae93c" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="2" position-y="94" size-x="0" size-x2="141" size-y="0" size-y2="199"/>
-    <entity uuid="39ad74d5-8a93-478c-bf15-0473b0ff7b04" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="321" position-y="132" size-x="0" size-x2="114" size-y="0" size-y2="157"/>
+    <entity uuid="39ad74d5-8a93-478c-bf15-0473b0ff7b04" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="321" position-y="130" size-x="0" size-x2="114" size-y="0" size-y2="157"/>
     <entity uuid="8a00460a-9a42-4218-990f-1134d72c729e" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="591" position-y="213" size-x="0" size-x2="101" size-y="0" size-y2="73"/>
-    <entity uuid="b49b424d-0be5-498d-836f-c63cbeb3d8ac" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="438" position-y="-70" size-x="0" size-x2="144" size-y="0" size-y2="101"/>
+    <entity uuid="b49b424d-0be5-498d-836f-c63cbeb3d8ac" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="437" position-y="-70" size-x="0" size-x2="144" size-y="0" size-y2="101"/>
     <entity uuid="dd6aa6ca-e5ac-44e3-84f2-a3ff9d0e2db3" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="576" position-y="72" size-x="0" size-x2="125" size-y="0" size-y2="59"/>
     <entity uuid="e3c81e1e-4ea2-4760-a344-588a9d4800ad" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="182" position-y="-81" size-x="0" size-x2="98" size-y="0" size-y2="59"/>
     <module uuid="cae614d0-4dd4-4a17-a744-54b5459bc78f" bg-color="#E7F5FD" position-x="61" position-y="72" size-x="18" size-x2="734" size-y="94" size-y2="453"/>

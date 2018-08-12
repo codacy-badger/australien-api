@@ -12,6 +12,7 @@ namespace App\Tests\Entity;
 
 use App\Entity\Country;
 use App\Entity\Locality;
+use CrEOF\Spatial\PHP\Types\Geometry\Point;
 use PHPUnit\Framework\TestCase;
 
 class LocalityTest extends TestCase
@@ -38,6 +39,18 @@ class LocalityTest extends TestCase
     public function testConstructor()
     {
         self::assertNull($this->locality->getId());
+        self::assertNull($this->locality->getGeometry());
+    }
+
+    /**
+     * Test geometry setter and getter.
+     */
+    public function testGeometry()
+    {
+        $geometry = new Point(1, 1);
+
+        $this->locality->setGeometry($geometry);
+        self::assertEquals($geometry, $this->locality->getGeometry());
     }
 
     /**

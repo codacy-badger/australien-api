@@ -21,6 +21,9 @@ App\Entity\Address:
     streetAddress:
       type: text
       nullable: true
+    geometry:
+      type: geometry
+      nullable: true
   oneToOne:
     locality:
       targetEntity: App\Entity\Locality

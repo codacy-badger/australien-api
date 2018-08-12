@@ -15,8 +15,13 @@ namespace App\Entity;
  *
  * Resource legality.
  */
-class Locality
+class Locality implements SpatialInterface
 {
+    /*
+     * Geometry trait implements geometry interface.
+     */
+    use SpatialTrait;
+
     /**
      * Locality id.
      *
