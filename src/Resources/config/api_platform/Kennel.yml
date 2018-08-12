@@ -1,0 +1,5 @@
+resources:
+    App\Entity\Kennel:
+        shortName: 'Kennel'
+        #description: 'Berger australien'
+        iri: 'https://schema.org/Thing'

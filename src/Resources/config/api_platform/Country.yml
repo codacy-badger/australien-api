@@ -1,0 +1,9 @@
+resources:
+    App\Entity\Country:
+        shortName: 'Country'
+        description: 'All countries'
+        iri: 'https://schema.org/Country'
+        collectionOperations:
+            get: ~
+        itemOperations:
+            get: ~

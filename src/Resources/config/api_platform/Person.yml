@@ -1,0 +1,5 @@
+resources:
+    App\Entity\Person:
+        shortName: 'Owner'
+        description: 'Owner of dogs and kennels'
+        iri: 'https://schema.org/Person'

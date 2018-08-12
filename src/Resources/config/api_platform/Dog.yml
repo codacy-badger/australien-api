@@ -1,0 +1,5 @@
+resources:
+    App\Entity\Dog:
+        shortName: 'Dog'
+        description: 'Berger australien'
+        iri: 'https://schema.org/Thing'

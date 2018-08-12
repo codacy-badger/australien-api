@@ -10,4 +10,5 @@ api_platform:
 
     mapping:
         #Path of entities
-        paths: ['%kernel.project_dir%/src/Entity']
+        paths:
+            - '%kernel.project_dir%/src/Resources/config/api_platform' # yaml or xml directory configuration

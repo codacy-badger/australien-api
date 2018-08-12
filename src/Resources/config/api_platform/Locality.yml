@@ -1,0 +1,9 @@
+resources:
+    App\Entity\Locality:
+        shortName: 'Locality'
+        description: 'All localities'
+        iri: 'https://schema.org/addressLocality'
+        collectionOperations:
+            get: ~
+        itemOperations:
+            get: ~

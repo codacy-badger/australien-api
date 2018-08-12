@@ -1,0 +1,5 @@
+resources:
+    App\Entity\Address:
+        shortName: 'Address'
+        description: 'Postal Address of kennel or owner'
+        iri: 'https://schema.org/PostalAddress'
