@@ -7,28 +7,15 @@ App\Entity\Country:
     code:
       type: string
       length: 2
-      column: cc_fips
   fields:
-    iso:
-      type: string
-      length: 2
-      nullable: false
-      column: cc_iso
-    tld:
-      type: string
-      length: 3
-      nullable: false
-      column: tld
     name:
       type: string
       length: 100
       nullable: false
-      column: country_name
     geometry:
       type: geometry
       nullable: true
+      column: co_geom
   indexes:
-    idx_cc_fips:
-      columns: [cc_fips]
-    idx_cc_iso:
-      columns: [cc_iso]
+    idx_country_code:
+      columns: [code]

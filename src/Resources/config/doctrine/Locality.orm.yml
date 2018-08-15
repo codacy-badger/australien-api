@@ -2,7 +2,7 @@ App\Entity\Locality:
   type: entity
   repositoryClass: App\Repository\LocalityRepository
   schema: relation
-  table: te_locality
+  table: tr_locality
   id:
     id:
       type: integer
@@ -13,13 +13,14 @@ App\Entity\Locality:
       type: string
       length: 200
       nullable: false
-      column: full_name_nd
+      column: name
     geometry:
       type: geometry
       nullable: true
+      column: lo_geometry
   manyToOne:
     country:
       targetEntity: App\Entity\Country
       joinColumns:
-        cc_fips:
-          referencedColumnName: cc_fips
+        country_code:
+          referencedColumnName: code

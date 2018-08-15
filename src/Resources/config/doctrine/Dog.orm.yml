@@ -75,6 +75,10 @@ App\Entity\Dog:
     ed:
       type: integer
       nullable: true
+    tail:
+      type: integer
+      nullable: false
+      column: dog_tail
   manyToOne:
     kennel:
       targetEntity: App\Entity\Kennel
@@ -98,6 +102,12 @@ App\Entity\Dog:
       joinColumns:
         mother_id:
           referencedColumnName: id
+    color:
+      targetEntity: App\Entity\Color
+      joinColumns:
+        color_id:
+          referencedColumnName: id
+          nullable: false
   Gedmo:
     Tree:
       Fields:

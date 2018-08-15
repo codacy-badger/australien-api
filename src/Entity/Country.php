@@ -30,20 +30,6 @@ class Country implements SpatialInterface
     private $code;
 
     /**
-     * Iso code of country.
-     *
-     * @var string
-     */
-    private $iso;
-
-    /**
-     * Tld code of country.
-     *
-     * @var string
-     */
-    private $tld;
-
-    /**
      * Country name.
      *
      * @var string
@@ -58,26 +44,6 @@ class Country implements SpatialInterface
     public function getCode(): ?string
     {
         return $this->code;
-    }
-
-    /**
-     * Country iso code getter.
-     *
-     * @return string
-     */
-    public function getIso(): ?string
-    {
-        return $this->iso;
-    }
-
-    /**
-     * Country tld code getter.
-     *
-     * @return string
-     */
-    public function getTld(): ?string
-    {
-        return $this->tld;
     }
 
     /**
@@ -98,26 +64,6 @@ class Country implements SpatialInterface
     public function setCode(string $code): void
     {
         $this->code = $code;
-    }
-
-    /**
-     * Country ISO setter.
-     *
-     * @param string $iso
-     */
-    public function setIso(string $iso): void
-    {
-        $this->iso = $iso;
-    }
-
-    /**
-     * Country TLD setter.
-     *
-     * @param string $tld
-     */
-    public function setTld(string $tld): void
-    {
-        $this->tld = $tld;
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the GMAO Application.
+ * This file is part of the Berger Australian Application.
  *
  * (c) Alexandre Tranchant <alexandre.tranchant@gmail.com>
  *
@@ -10,6 +10,7 @@
 
 namespace App\Tests\Entity;
 
+use App\Entity\Color;
 use App\Entity\Kennel;
 use App\Entity\Person;
 use App\Exception\SexException;
@@ -37,6 +38,7 @@ class DogTest extends TestCase
     public function setUp(): void
     {
         $this->dog = new Dog();
+        $this->dog->setColor(new Color());
     }
 
     /**
@@ -65,6 +67,7 @@ class DogTest extends TestCase
         self::assertNull($this->dog->getPedigreeNumber());
         self::assertNull($this->dog->getPra());
         self::assertNull($this->dog->getTatoo());
+        self::assertNull($this->dog->getTail());
         self::assertFalse($this->dog->isCeaGeneticTested());
         self::assertFalse($this->dog->isDead());
         self::assertFalse($this->dog->isHsf4GeneticTested());
@@ -155,6 +158,26 @@ class DogTest extends TestCase
 
         $dog->setHd(Dog::B);
         self::assertTrue($this->dog->areHealthCompatible($dog));
+
+        $merle = new Color();
+        $merle->setMerle(true);
+        $dog->setColor($merle);
+        self::assertTrue($this->dog->areHealthCompatible($dog));
+
+        $this->dog->setColor($merle);
+        self::assertFalse($this->dog->areHealthCompatible($dog));
+
+        $merle->setMerle(false);
+        self::assertTrue($this->dog->areHealthCompatible($dog));
+
+        $dog->setTail(Dog::NOTAIL);
+        self::assertTrue($this->dog->areHealthCompatible($dog));
+
+        $this->dog->setTail(Dog::HALFTAIL);
+        self::assertFalse($this->dog->areHealthCompatible($dog));
+
+        $dog->setTail(Dog::HALFTAIL);
+        self::assertTrue($this->dog->areHealthCompatible($dog));
     }
 
     public function testCanHaveNewChildren()
@@ -212,6 +235,17 @@ class DogTest extends TestCase
         $this->dog->setBreeder($breeder);
 
         self::assertEquals($breeder, $this->dog->getBreeder());
+    }
+
+    /**
+     * Test getter and setter of color.
+     */
+    public function testColor()
+    {
+        $color = new Color();
+        $this->dog->setColor($color);
+
+        self::assertEquals($color, $this->dog->getColor());
     }
 
     /**
@@ -291,6 +325,17 @@ class DogTest extends TestCase
         $this->dog->setTatoo($tatoo);
 
         self::assertEquals($tatoo, $this->dog->getTatoo());
+    }
+
+    /**
+     * Test getter and setter of tail.
+     */
+    public function testTail()
+    {
+        $tail = Dog::NOTAIL;
+        $this->dog->setTail($tail);
+
+        self::assertEquals($tail, $this->dog->getTail());
     }
 
     /**

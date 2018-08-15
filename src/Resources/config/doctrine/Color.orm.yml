@@ -1,0 +1,20 @@
+App\Entity\Color:
+  type: entity
+  schema: relation
+  table: tr_color
+  repositoryClass: App\Repository\ColorRepository
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+      nullable: false
+    identifier:
+      type: string
+      nullable: false
+    merle:
+      type: boolean
+      nullable: false

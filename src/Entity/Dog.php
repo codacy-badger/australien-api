@@ -40,6 +40,12 @@ class Dog
 
     const D = 3;
 
+    const LONGTAIL = 0;
+
+    const HALFTAIL = 1;
+
+    const NOTAIL = 2;
+
     /**
      * Dog id.
      *
@@ -230,6 +236,24 @@ class Dog
     private $owner;
 
     /**
+     * Dog color.
+     *
+     * @var Color
+     */
+    private $color;
+
+    /**
+     * Tail.
+     *
+     * LONGTAIL = 0
+     * HALFTAIL = 1
+     * NOTAIL = 2
+     *
+     * @var int
+     */
+    private $tail;
+
+    /**
      * Are health of these dogs compatible?
      *
      * @param Dog $dog
@@ -243,7 +267,9 @@ class Dog
             && $this->arePraCompatible($dog)
             && $this->areCeaCompatible($dog)
             && $this->areHdCompatible($dog)
-            && $this->areEdCompatible($dog);
+            && $this->areEdCompatible($dog)
+            && $this->areTailCompatible($dog)
+            && $this->areColorCompatible($dog);
     }
 
     /**
@@ -302,6 +328,16 @@ class Dog
     }
 
     /**
+     * Color getter.
+     *
+     * @return Color
+     */
+    public function getColor(): Color
+    {
+        return $this->color;
+    }
+
+    /**
      * Dog deathday getter.
      *
      * @return DateTime
@@ -329,6 +365,16 @@ class Dog
     public function getPedigreeNumber(): ?string
     {
         return $this->pedigreeNumber;
+    }
+
+    /**
+     * Tail getter.
+     *
+     * @return int
+     */
+    public function getTail(): ?int
+    {
+        return $this->tail;
     }
 
     /**
@@ -552,6 +598,16 @@ class Dog
     }
 
     /**
+     * Color setter.
+     *
+     * @param Color $color
+     */
+    public function setColor(Color $color): void
+    {
+        $this->color = $color;
+    }
+
+    /**
      * Dog death day setter.
      *
      * @param DateTime $deathday
@@ -599,6 +655,16 @@ class Dog
     public function setSterilized(bool $sterilized = true): void
     {
         $this->sterilized = $sterilized;
+    }
+
+    /**
+     * Tail setter.
+     *
+     * @param int $tail
+     */
+    public function setTail(int $tail): void
+    {
+        $this->tail = $tail;
     }
 
     /**
@@ -852,5 +918,29 @@ class Dog
     {
         return $this->isMale() && $dog->isFemale()
             || $this->isFemale() && $dog->isMale();
+    }
+
+    /**
+     * 2 Notails can have unsafe children.
+     *
+     * @param Dog $dog
+     *
+     * @return bool
+     */
+    private function areTailCompatible(Dog $dog): bool
+    {
+        return 3 > $this->getTail() + $dog->getTail();
+    }
+
+    /**
+     * 2 merl can have unsafe children.
+     *
+     * @param Dog $dog
+     *
+     * @return bool
+     */
+    private function areColorCompatible(Dog $dog): bool
+    {
+        return !($this->getColor()->isMerle() && $dog->getColor()->isMerle());
     }
 }

@@ -24,6 +24,7 @@ App\Entity\Address:
     geometry:
       type: geometry
       nullable: true
+      column: ad_geometry
   manyToOne:
     locality:
       targetEntity: App\Entity\Locality

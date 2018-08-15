@@ -38,8 +38,6 @@ class CountryTest extends TestCase
     {
         self::assertNull($this->country->getCode());
         self::assertNull($this->country->getGeometry());
-        self::assertNull($this->country->getIso());
-        self::assertNull($this->country->getTld());
         self::assertNull($this->country->getName());
     }
 
@@ -63,38 +61,5 @@ class CountryTest extends TestCase
 
         $this->country->setGeometry($geometry);
         self::assertEquals($geometry, $this->country->getGeometry());
-    }
-
-    /**
-     * Test iso code setter and getter.
-     */
-    public function testIso()
-    {
-        $code = 'FR';
-
-        $this->country->setIso($code);
-        self::assertEquals($code, $this->country->getIso());
-    }
-
-    /**
-     * Test tld code setter and getter.
-     */
-    public function testTld()
-    {
-        $code = 'FR';
-
-        $this->country->setTld($code);
-        self::assertEquals($code, $this->country->getTld());
-    }
-
-    /**
-     * Test name code setter and getter.
-     */
-    public function testName()
-    {
-        $name = 'France';
-
-        $this->country->setName($name);
-        self::assertEquals($name, $this->country->getName());
     }
 }
