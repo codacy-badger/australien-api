@@ -46,7 +46,7 @@ script:
   # Is database schema valid and sync?
   - php bin/console doctrine:schema:validate
   # Phpunit and codecoveralls
-  - if [ "$TRAVIS_PHP_VERSION" == "7.2" ]; then travis_wait 40 --coverage-clover build/logs/clover.xml; fi
+  - if [ "$TRAVIS_PHP_VERSION" == "7.2" ]; then travis_wait 40 php bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml; fi
   - if [ "$TRAVIS_PHP_VERSION" != "7.2" ]; then php bin/phpunit; fi
   #These two lines test the migration scripts
   - php bin/console doctrine:migrations:migrate first --no-interaction
