@@ -62,4 +62,15 @@ class CountryTest extends TestCase
         $this->country->setGeometry($geometry);
         self::assertEquals($geometry, $this->country->getGeometry());
     }
+
+    /**
+     * Test name setter and getter.
+     */
+    public function testName()
+    {
+        $name = 'name';
+
+        $this->country->setName($name);
+        self::assertEquals($name, $this->country->getName());
+    }
 }

@@ -25,6 +25,8 @@ class Country implements SpatialInterface
     /**
      * Code of country.
      *
+     * @TODO rename code into identifier
+     *
      * @var string
      */
     private $code;
