@@ -11,6 +11,9 @@
             "ref": "18727d8f229306860b46955f438e1897421da689"
         }
     },
+    "codacy/coverage": {
+        "version": "1.4.2"
+    },
     "composer/ca-bundle": {
         "version": "1.1.1"
     },
@@ -118,6 +121,9 @@
     },
     "fig/link-util": {
         "version": "1.0.0"
+    },
+    "gitonomy/gitlib": {
+        "version": "v1.0.4"
     },
     "guzzlehttp/guzzle": {
         "version": "6.3.3"
