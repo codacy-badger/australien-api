@@ -46,12 +46,12 @@ script:
   # Is database schema valid and sync?
   - php bin/console doctrine:schema:validate
   # Phpunit and codecoveralls
-  - travis_wait 40 php bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
+  - php bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
   # These two lines test the migration scripts
   - php bin/console doctrine:migrations:migrate first --no-interaction
   - php bin/console doctrine:migrations:migrate --no-interaction
 
-after_success:
+after_script:
   - travis_retry php vendor/bin/php-coveralls -v
   - php vendor/bin/codacycoverage clover build/coverage/xml
 
