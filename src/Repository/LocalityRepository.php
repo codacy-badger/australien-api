@@ -13,8 +13,8 @@ namespace App\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Country Repository Class.
+ * Locality Repository Class.
  */
-class CountryRepository extends EntityRepository
+class LocalityRepository extends EntityRepository
 {
 }

@@ -205,7 +205,17 @@
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="a380062e-dbd1-4f61-a378-fbe4bbec34dc"/>
       <field name="name" type="string" required="true" uuid="15883f2e-ed1a-4e14-b447-8412afe5f8ff"/>
       <field name="identifier" type="string" required="true" uuid="8d7d94c8-f8d2-4041-905e-120c298dc9ce"/>
-      <field name="merle" type="boolean" required="true" uuid="2a3b1231-100c-4665-9ed9-4c645f45b836"/>
+      <field name="merle" type="boolean" default="false" required="true" uuid="2a3b1231-100c-4665-9ed9-4c645f45b836"/>
+      <field name="black" type="boolean" default="false" required="true" uuid="21194ddf-9597-48ba-87a9-0e225febab39"/>
+      <field name="red" type="boolean" default="false" required="true" uuid="9da183a6-30ef-4f99-a048-f51a89172c7d"/>
+      <index name="uk_color" description="Color are different" unique="true">
+        <index-field name="merle"/>
+        <index-field name="black"/>
+        <index-field name="red"/>
+      </index>
+      <index name="uk_color_identifier" unique="true">
+        <index-field name="identifier"/>
+      </index>
       <orm-attributes>
         <attribute name="schema">relation</attribute>
         <attribute name="table">tr_color</attribute>

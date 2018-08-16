@@ -39,11 +39,37 @@ class Color
     private $name;
 
     /**
+     * Is there black in the robe?
+     *
+     * @var bool
+     */
+    private $black = false;
+
+    /**
      * Is this a merl dog?
      *
      * @var bool
      */
     private $merle = false;
+
+    /**
+     * Is there red in the robe?
+     *
+     * @var bool
+     */
+    private $red = false;
+
+    /**
+     * Is there black in the color of the dog?
+     *
+     * Black getter.
+     *
+     * @return bool
+     */
+    public function isBlack(): bool
+    {
+        return $this->black;
+    }
 
     /**
      * Merle getter.
@@ -53,6 +79,18 @@ class Color
     public function isMerle(): bool
     {
         return $this->merle;
+    }
+
+    /**
+     * Is there red in the color of the dog?
+     *
+     * Red getter.
+     *
+     * @return bool
+     */
+    public function isRed(): bool
+    {
+        return $this->red;
     }
 
     /**
@@ -106,6 +144,16 @@ class Color
     }
 
     /**
+     * Set black color.
+     *
+     * @param bool $black
+     */
+    public function setBlack(bool $black): void
+    {
+        $this->black = $black;
+    }
+
+    /**
      * Merle setter.
      *
      * @param bool $merle
@@ -113,5 +161,15 @@ class Color
     public function setMerle(bool $merle): void
     {
         $this->merle = $merle;
+    }
+
+    /**
+     * Red setter.
+     *
+     * @param bool $red
+     */
+    public function setRed(bool $red): void
+    {
+        $this->red = $red;
     }
 }

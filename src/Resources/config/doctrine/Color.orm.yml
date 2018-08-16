@@ -18,3 +18,20 @@ App\Entity\Color:
     merle:
       type: boolean
       nullable: false
+      options:
+        default: false
+    black:
+      type: boolean
+      nullable: false
+      options:
+        default: false
+    red:
+      type: boolean
+      nullable: false
+      options:
+        default: false
+  uniqueConstraints:
+    uk_color:
+      columns: [merle, black, red]
+    uk_color_identifier:
+      columns: [identifier]

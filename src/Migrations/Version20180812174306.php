@@ -36,16 +36,16 @@ final class Version20180812174306 extends AbstractMigration
         parent::preUp($schema);
 
         //LOADING DATA
-        $countryFile = __DIR__ . '/../Resources/data/country.csv';
-        $cityFile = __DIR__ . '/../Resources/data/cities.csv';
+        $countryFile = __DIR__.'/../Resources/data/country.csv';
+        $cityFile = __DIR__.'/../Resources/data/cities.csv';
 
         //DIRECTORY
         $directory = getenv('LOAD_DIRECTORY');
         if (false === $directory) {
             $directory = sys_get_temp_dir();
         }
-        $this->countryCSV = $directory . DIRECTORY_SEPARATOR . 'country.csv';
-        $this->cityCSV = $directory . DIRECTORY_SEPARATOR . 'cities.csv';
+        $this->countryCSV = $directory.DIRECTORY_SEPARATOR.'country.csv';
+        $this->cityCSV = $directory.DIRECTORY_SEPARATOR.'cities.csv';
 
         //Files copy
         if (1 === getenv('COPY_FILES')) {
@@ -70,7 +70,6 @@ final class Version20180812174306 extends AbstractMigration
             unlink($this->cityCSV);
         }
     }
-
 
     /**
      * Database creation.
@@ -125,11 +124,10 @@ final class Version20180812174306 extends AbstractMigration
         //$cityFile = __DIR__ . '/../Resources/data/city.csv';
         $this->addsql("COPY relation.tr_country (code, name) FROM '{$this->countryCSV}' WITH (FORMAT CSV)");
         //unlink($destinationFile);
-        $this->addsql("CREATE TABLE relation.tr_city (country VARCHAR(2) DEFAULT NULL, 	code VARCHAR(200) DEFAULT NULL, name VARCHAR(200) DEFAULT NULL, region varchar(3) DEFAULT NULL,	population varchar(9) DEFAULT NULL, latitude double precision DEFAULT NULL, longitude double precision DEFAULT NULL)");
+        $this->addsql('CREATE TABLE relation.tr_city (country VARCHAR(2) DEFAULT NULL, 	code VARCHAR(200) DEFAULT NULL, name VARCHAR(200) DEFAULT NULL, region varchar(3) DEFAULT NULL,	population varchar(9) DEFAULT NULL, latitude double precision DEFAULT NULL, longitude double precision DEFAULT NULL)');
         $this->addsql("COPY relation.tr_city (country, code, name, region, population, latitude, longitude) FROM '{$this->cityCSV}' WITH (FORMAT CSV)");
         $this->addsql("INSERT INTO relation.tr_locality (id, country_code, name, lo_geometry) SELECT nextval('relation.tr_locality_id_seq'), upper(country), name, st_point(latitude, longitude) FROM relation.tr_city");
-        $this->addsql("DROP TABLE relation.tr_city");
-
+        $this->addsql('DROP TABLE relation.tr_city');
     }
 
     /**

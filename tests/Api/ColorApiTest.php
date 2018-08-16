@@ -14,74 +14,74 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class to test API on country.
+ * Class to test API on color.
  */
-class CountryApiTest extends WebTestCase
+class ColorApiTest extends WebTestCase
 {
     /**
-     * Get all countries.
+     * Get all colors.
      */
     public function testGetCollection()
     {
         $client = static::createClient();
-        $client->request('GET', '/api/countries.jsonld');
+        $client->request('GET', '/api/colors.jsonld');
         self::assertTrue($client->getResponse()->isSuccessful());
         self::assertJson($client->getResponse()->getContent());
 
         $jsonResponse = json_decode($client->getResponse()->getContent());
-        self::assertEquals('/api/contexts/Country', $jsonResponse->{'@context'});
-        self::assertEquals('/api/countries', $jsonResponse->{'@id'});
-        self::assertEquals('https://schema.org/Country', $jsonResponse->{'hydra:member'}[0]->{'@type'});
+        self::assertEquals('/api/contexts/Color', $jsonResponse->{'@context'});
+        self::assertEquals('/api/colors', $jsonResponse->{'@id'});
+        self::assertEquals('https://schema.org/Thing', $jsonResponse->{'hydra:member'}[0]->{'@type'});
     }
 
     /**
-     * Get all countries.
+     * Get all colors.
      */
     public function testGetItem()
     {
         $client = static::createClient();
-        $client->request('GET', '/api/countries/FR.jsonld');
+        $client->request('GET', '/api/colors/1.jsonld');
         self::assertTrue($client->getResponse()->isSuccessful());
         self::assertJson($client->getResponse()->getContent());
 
         $jsonResponse = json_decode($client->getResponse()->getContent());
-        self::assertEquals('/api/contexts/Country', $jsonResponse->{'@context'});
-        self::assertEquals('/api/countries/FR', $jsonResponse->{'@id'});
-        self::assertEquals('https://schema.org/Country', $jsonResponse->{'@type'});
-        self::assertEquals('FR', $jsonResponse->identifier);
-        self::assertEquals('France', $jsonResponse->name);
-        self::assertNull($jsonResponse->geometry);
+        self::assertEquals('/api/contexts/Color', $jsonResponse->{'@context'});
+        self::assertEquals('/api/colors/1', $jsonResponse->{'@id'});
+        self::assertEquals('https://schema.org/Thing', $jsonResponse->{'@type'});
+        self::assertEquals('1', $jsonResponse->id);
+        self::assertEquals('gris-merle', $jsonResponse->identifier);
+        self::assertEquals('Gris Merle', $jsonResponse->name);
     }
 
     /**
-     * Delete a country is not possible.
+     * Delete a color is not possible.
      */
     public function testDeleteItem()
     {
         $client = static::createClient();
-        $client->request('DELETE', '/api/countries/FR');
+        $client->request('DELETE', '/api/colors/1');
         self::assertFalse($client->getResponse()->isSuccessful());
         self::assertEquals(Response::HTTP_METHOD_NOT_ALLOWED, $client->getResponse()->getStatusCode());
     }
 
     /**
-     * Update a country is not possible.
+     * Update a color is not possible.
      */
     public function testUpdateItem()
     {
         $client = static::createClient();
-        $client->request('PUT', '/api/countries/FR');
+        $client->request('PUT', '/api/colors/1');
         self::assertFalse($client->getResponse()->isSuccessful());
         self::assertEquals(Response::HTTP_METHOD_NOT_ALLOWED, $client->getResponse()->getStatusCode());
     }
 
     /**
-     * Create a country is not possible.
+     * Create a color is not possible.
      */
     public function testCreateItem()
     {
         $client = static::createClient();
-        $client->request('POST', '/api/countries/FR');
+        $client->request('POST', '/api/colors/1');
         self::assertFalse($client->getResponse()->isSuccessful());
         self::assertEquals(Response::HTTP_METHOD_NOT_ALLOWED, $client->getResponse()->getStatusCode());
     }

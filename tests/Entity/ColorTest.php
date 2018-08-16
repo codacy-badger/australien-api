@@ -32,6 +32,16 @@ class ColorTest extends TestCase
     }
 
     /**
+     * Test the method constructor.
+     */
+    public function testConstructor()
+    {
+        self::assertFalse($this->color->isBlack());
+        self::assertFalse($this->color->isMerle());
+        self::assertFalse($this->color->isRed());
+    }
+
+    /**
      * Test the method GetName.
      */
     public function testGetName()
@@ -60,5 +70,27 @@ class ColorTest extends TestCase
         self::assertTrue($this->color->isMerle());
         $this->color->setMerle(false);
         self::assertFalse($this->color->isMerle());
+    }
+
+    /**
+     * Test the method IsRed.
+     */
+    public function testIsRed()
+    {
+        $this->color->setRed(true);
+        self::assertTrue($this->color->isRed());
+        $this->color->setRed(false);
+        self::assertFalse($this->color->isRed());
+    }
+
+    /**
+     * Test the method IsBlack.
+     */
+    public function testIsBlack()
+    {
+        $this->color->setBlack(true);
+        self::assertTrue($this->color->isBlack());
+        $this->color->setBlack(false);
+        self::assertFalse($this->color->isBlack());
     }
 }

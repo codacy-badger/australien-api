@@ -2,7 +2,7 @@ resources:
     App\Entity\Color:
         shortName: 'Color'
         description: 'All available dog color'
-        iri: 'https://schema.org/color'
+        iri: 'https://schema.org/Thing'
         collectionOperations:
             get: ~
         itemOperations:

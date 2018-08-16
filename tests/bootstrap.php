@@ -14,7 +14,3 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 $dotEnv = new Dotenv();
 $dotEnv->load(__DIR__.'/../.env');
-$dotEnv->populate([
-    //'APP_ENV' => 'test',
-    // ...
-]);
