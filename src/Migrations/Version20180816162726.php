@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
@@ -78,10 +80,10 @@ final class Version20180816162726 extends AbstractMigration
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\DBAL\Migrations\AbortMigrationException
      */
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
+        $this->abortIf('postgresql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'postgresql\'.');
 
         $this->addSql('CREATE SCHEMA data');
         $this->addSql('CREATE SCHEMA relation');
@@ -140,19 +142,20 @@ final class Version20180816162726 extends AbstractMigration
         $this->addsql("COPY relation.tr_city (country, code, name, region, population, latitude, longitude) FROM '{$this->cityCSV}' WITH (FORMAT CSV)");
         $this->addsql("INSERT INTO relation.tr_locality (locality_id, country_id, name, lo_geometry) SELECT nextval('relation.tr_locality_locality_id_seq'), upper(country), name, st_point(latitude, longitude) FROM relation.tr_city");
         $this->addsql('DROP TABLE relation.tr_city');
-
     }
 
     /**
-     * Database
+     * Database.
+     *
      * @param Schema $schema
+     *
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\DBAL\Migrations\AbortMigrationException
      */
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
+        $this->abortIf('postgresql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'postgresql\'.');
 
         $this->addSql('ALTER TABLE data.te_kennel DROP CONSTRAINT FK_KENNEL_ADDRESS');
         $this->addSql('ALTER TABLE data.te_owner DROP CONSTRAINT FK_OWNER_ADDRESS');

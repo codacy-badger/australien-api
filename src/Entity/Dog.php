@@ -56,7 +56,7 @@ class Dog
     private $breeder;
 
     /**
-     * Dog checkups
+     * Dog checkups.
      *
      * @var Collection|Checkup
      */
@@ -605,6 +605,7 @@ class Dog
      * Test that all checkup are compatible.
      *
      * @param $dog
+     *
      * @return bool
      */
     private function areCheckupCompatible(Dog $dog): bool

@@ -22,7 +22,7 @@ class CheckupTest extends TestCase
 {
     /**
      * Checkup entity to test.
-     * 
+     *
      * @var Checkup
      */
     private $checkup;
@@ -41,14 +41,14 @@ class CheckupTest extends TestCase
     /**
      * Test constructor.
      */
-    public function testConstructor(): void 
+    public function testConstructor(): void
     {
         self::assertNotNull($this->checkup->getHealth());
         self::assertNotNull($this->checkup->getDog());
         self::assertNotNull($this->checkup->getValue());
         self::assertEmpty($this->checkup->getValue());
     }
-    
+
     /**
      * Test Health getter and setter.
      */
@@ -58,6 +58,7 @@ class CheckupTest extends TestCase
         $this->checkup->setHealth($health);
         self::assertEquals($health, $this->checkup->getHealth());
     }
+
     /**
      * Test Dog getter and setter.
      */

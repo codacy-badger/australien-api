@@ -39,7 +39,7 @@ class HealthTest extends TestCase
         self::assertNotNull($this->health->getMaximum());
         self::assertEmpty($this->health->getMaximum());
     }
-    
+
     /**
      * Test identifier getter and setter.
      */
