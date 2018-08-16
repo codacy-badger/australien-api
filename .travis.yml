@@ -38,6 +38,7 @@ before_script:
   # - php bin/console doctrine:query:sql "UPDATE ext_log_entries SET username='Dawny' where username is null"
   # Directory used by codecoverage
   - mkdir -p build/logs
+  - mkdir -p build/coverage
 
 script:
   # Tests de versions
@@ -54,6 +55,7 @@ script:
 after_script:
   - travis_retry php vendor/bin/php-coveralls -v
   - export CODACY_PROJECT_TOKEN=9f007f22a81546f3822021ae8d7d1049
+  - mv build/logs/clover.xml build/coverage/xml
   - php vendor/bin/codacycoverage clover build/coverage/xml
 
 notifications:
