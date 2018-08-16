@@ -52,7 +52,8 @@ class DogTest extends TestCase
         self::assertTrue($this->dog->canHaveNewChildren());
         self::assertNull($this->dog->getBirthday());
         self::assertNull($this->dog->getBreeder());
-        self::assertNull($this->dog->getCea());
+        self::assertNotNull($this->dog->getCheckup());
+        self::assertEmpty($this->dog->getCheckup());
         self::assertNull($this->dog->getDeathday());
         self::assertNull($this->dog->getFather());
         self::assertNull($this->dog->getDogId());
@@ -76,78 +77,6 @@ class DogTest extends TestCase
     public function testAreHealthCompatible()
     {
         $dog = new Dog();
-        self::assertTrue($this->dog->areHealthCompatible($dog));
-
-        $dog->setMdr1(Dog::MOINSMOINS);
-        self::assertFalse($this->dog->areHealthCompatible($dog));
-
-        $dog->setMdr1(Dog::PLUSMOINS);
-        self::assertTrue($this->dog->areHealthCompatible($dog));
-
-        $this->dog->setMdr1(Dog::PLUSMOINS);
-        self::assertFalse($this->dog->areHealthCompatible($dog));
-
-        $dog->setMdr1(Dog::PLUSPLUS);
-        self::assertTrue($this->dog->areHealthCompatible($dog));
-
-        $dog->setHsf4(Dog::MOINSMOINS);
-        self::assertFalse($this->dog->areHealthCompatible($dog));
-
-        $dog->setHsf4(Dog::PLUSMOINS);
-        self::assertTrue($this->dog->areHealthCompatible($dog));
-
-        $this->dog->setHsf4(Dog::PLUSMOINS);
-        self::assertFalse($this->dog->areHealthCompatible($dog));
-
-        $dog->setHsf4(Dog::PLUSPLUS);
-        self::assertTrue($this->dog->areHealthCompatible($dog));
-
-        $dog->setPra(Dog::MOINSMOINS);
-        self::assertFalse($this->dog->areHealthCompatible($dog));
-
-        $dog->setPra(Dog::PLUSMOINS);
-        self::assertTrue($this->dog->areHealthCompatible($dog));
-
-        $this->dog->setPra(Dog::PLUSMOINS);
-        self::assertFalse($this->dog->areHealthCompatible($dog));
-
-        $dog->setPra(Dog::PLUSPLUS);
-        self::assertTrue($this->dog->areHealthCompatible($dog));
-
-        $dog->setCea(Dog::MOINSMOINS);
-        self::assertFalse($this->dog->areHealthCompatible($dog));
-
-        $dog->setCea(Dog::PLUSMOINS);
-        self::assertTrue($this->dog->areHealthCompatible($dog));
-
-        $this->dog->setCea(Dog::PLUSMOINS);
-        self::assertFalse($this->dog->areHealthCompatible($dog));
-
-        $dog->setCea(Dog::PLUSPLUS);
-        self::assertTrue($this->dog->areHealthCompatible($dog));
-
-        $dog->setEd(Dog::D);
-        self::assertFalse($this->dog->areHealthCompatible($dog));
-
-        $dog->setEd(Dog::C);
-        self::assertTrue($this->dog->areHealthCompatible($dog));
-
-        $this->dog->setEd(Dog::B);
-        self::assertFalse($this->dog->areHealthCompatible($dog));
-
-        $dog->setEd(Dog::B);
-        self::assertTrue($this->dog->areHealthCompatible($dog));
-
-        $dog->setHd(Dog::D);
-        self::assertFalse($this->dog->areHealthCompatible($dog));
-
-        $dog->setHd(Dog::C);
-        self::assertTrue($this->dog->areHealthCompatible($dog));
-
-        $this->dog->setHd(Dog::B);
-        self::assertFalse($this->dog->areHealthCompatible($dog));
-
-        $dog->setHd(Dog::B);
         self::assertTrue($this->dog->areHealthCompatible($dog));
 
         $merle = new Color();

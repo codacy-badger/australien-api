@@ -34,7 +34,7 @@ class Health
      *
      * @var int
      */
-    private $maximum;
+    private $maximum = 0;
 
     /**
      * Health database ID.
@@ -66,4 +66,23 @@ class Health
         return $this->maximum;
     }
 
+    /**
+     * Identifier setter.
+     *
+     * @param string $identifier
+     */
+    public function setIdentifier(string $identifier): void
+    {
+        $this->identifier = $identifier;
+    }
+
+    /**
+     * Maximum setter.
+     *
+     * @param int $maximum
+     */
+    public function setMaximum(int $maximum): void
+    {
+        $this->maximum = $maximum;
+    }
 }

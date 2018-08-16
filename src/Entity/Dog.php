@@ -12,6 +12,7 @@ namespace App\Entity;
 
 use App\Exception\SexException;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
@@ -26,20 +27,6 @@ class Dog
     const MALE = true;
 
     const UNKNOWN = null;
-
-    const PLUSPLUS = 0;
-
-    const PLUSMOINS = 1;
-
-    const MOINSMOINS = 2;
-
-    const A = 0;
-
-    const B = 1;
-
-    const C = 2;
-
-    const D = 3;
 
     const LONGTAIL = 0;
 
@@ -127,102 +114,6 @@ class Dog
     private $uuid;
 
     /**
-     * Health : HSF4.
-     *
-     * 0: +/+
-     * 1: +/-
-     * 2: -/-
-     *
-     * @var int
-     */
-    private $hsf4;
-
-    /**
-     * Genetic test to have HSF4 results.
-     *
-     * @var bool
-     */
-    private $hsf4_geneticTested = false;
-
-    /**
-     * Health : CEA.
-     *
-     * 0: +/+
-     * 1: +/-
-     * 2: -/-
-     *
-     * @var int
-     */
-    private $cea;
-
-    /**
-     * Genetic test done to know CEA results.
-     *
-     * @var bool
-     */
-    private $cea_geneticTested = false;
-
-    /**
-     * Health : PRA.
-     *
-     * 0: +/+
-     * 1: +/-
-     * 2: -/-
-     *
-     * @var int
-     */
-    private $pra;
-
-    /**
-     * Genetic test done to know PRA results.
-     *
-     * @var bool
-     */
-    private $pra_geneticTested = false;
-
-    /**
-     * Health : MDR1.
-     *
-     * 0: +/+
-     * 1: +/-
-     * 2: -/-
-     *
-     * @var int
-     */
-    private $mdr1;
-
-    /**
-     * Genetic test done to know MDR1 results.
-     *
-     * @var bool
-     */
-    private $mdr1_geneticTested = false;
-
-    /**
-     * Health : hanche dysplasie.
-     *
-     * 0: A
-     * 1: B
-     * 2: C
-     * 3: D
-     *
-     * @var int
-     */
-    private $hd;
-
-    /**
-     * Health : ED.
-     *
-     * 0: A
-     * 1: B
-     * 2: C
-     * 3: D
-     *
-     * @var int
-     */
-    private $ed;
-
-    /**
      * Father.
      *
      * @var Dog
@@ -269,6 +160,14 @@ class Dog
     private $tail;
 
     /**
+     * Dog constructor.
+     */
+    public function __construct()
+    {
+        $this->checkup = new ArrayCollection();
+    }
+
+    /**
      * Are health of these dogs compatible?
      *
      * @param Dog $dog
@@ -277,12 +176,7 @@ class Dog
      */
     public function areHealthCompatible(Dog $dog): bool
     {
-        return $this->areMdr1Compatible($dog)
-            && $this->areHsf4Compatible($dog)
-            && $this->arePraCompatible($dog)
-            && $this->areCeaCompatible($dog)
-            && $this->areHdCompatible($dog)
-            && $this->areEdCompatible($dog)
+        return $this->areCheckupCompatible($dog)
             && $this->areTailCompatible($dog)
             && $this->areColorCompatible($dog);
     }
@@ -343,6 +237,16 @@ class Dog
     }
 
     /**
+     * Get checkup collection.
+     *
+     * @return Checkup[]|Collection
+     */
+    public function getCheckup()
+    {
+        return $this->checkup;
+    }
+
+    /**
      * Color getter.
      *
      * @return Color
@@ -390,6 +294,16 @@ class Dog
     public function getTail(): ?int
     {
         return $this->tail;
+    }
+
+    /**
+     * Get UUID for the dog link and avoid spider.
+     *
+     * @return string
+     */
+    public function getUuid(): string
+    {
+        return $this->uuid;
     }
 
     /**
@@ -450,106 +364,6 @@ class Dog
     public function getTatoo(): ?string
     {
         return $this->tatoo;
-    }
-
-    /**
-     * Dog HSF4 getter.
-     *
-     * @return int
-     */
-    public function getHsf4(): ?int
-    {
-        return $this->hsf4;
-    }
-
-    /**
-     * Dog HSF4 genetic test getter.
-     *
-     * @return bool
-     */
-    public function isHsf4GeneticTested(): bool
-    {
-        return $this->hsf4_geneticTested;
-    }
-
-    /**
-     * Dog CEA getter.
-     *
-     * @return int
-     */
-    public function getCea(): ?int
-    {
-        return $this->cea;
-    }
-
-    /**
-     * Dog CEA genetic test getter.
-     *
-     * @return bool
-     */
-    public function isCeaGeneticTested()
-    {
-        return $this->cea_geneticTested;
-    }
-
-    /**
-     * Dog PRA getter.
-     *
-     * @return int
-     */
-    public function getPra(): ?int
-    {
-        return $this->pra;
-    }
-
-    /**
-     * Dog PRA genetic test getter.
-     *
-     * @return bool
-     */
-    public function isPraGeneticTested(): bool
-    {
-        return $this->pra_geneticTested;
-    }
-
-    /**
-     * Dog MDR1 getter.
-     *
-     * @return int
-     */
-    public function getMdr1(): ?int
-    {
-        return $this->mdr1;
-    }
-
-    /**
-     * Dog MDR1 genetic test getter.
-     *
-     * @return bool
-     */
-    public function isMdr1GeneticTested(): bool
-    {
-        return $this->mdr1_geneticTested;
-    }
-
-    /**
-     * Dog HD getter.
-     *
-     * @return int
-     */
-    public function getHd(): ?int
-    {
-        return $this->hd;
-    }
-
-    /**
-     * Dog ED getter.
-     *
-     * @return int
-     */
-    public function getEd(): ?int
-    {
-        return $this->ed;
     }
 
     /**
@@ -693,106 +507,6 @@ class Dog
     }
 
     /**
-     * Dog Hsf4 setter.
-     *
-     * @param int $hsf4
-     */
-    public function setHsf4(int $hsf4): void
-    {
-        $this->hsf4 = $hsf4;
-    }
-
-    /**
-     * Dog HSF4 genetic test setter.
-     *
-     * @param bool $hsf4_geneticTested
-     */
-    public function setHsf4GeneticTested(bool $hsf4_geneticTested = true): void
-    {
-        $this->hsf4_geneticTested = $hsf4_geneticTested;
-    }
-
-    /**
-     * Dog CEA setter.
-     *
-     * @param int $cea
-     */
-    public function setCea(int $cea): void
-    {
-        $this->cea = $cea;
-    }
-
-    /**
-     * Dog Cea genetic test setter.
-     *
-     * @param bool $cea_geneticTested
-     */
-    public function setCeaGeneticTested(bool $cea_geneticTested = true): void
-    {
-        $this->cea_geneticTested = $cea_geneticTested;
-    }
-
-    /**
-     * Dog PRA setter.
-     *
-     * @param int $pra
-     */
-    public function setPra(int $pra): void
-    {
-        $this->pra = $pra;
-    }
-
-    /**
-     * Dog Pra genetic test setter.
-     *
-     * @param bool $pra_geneticTested
-     */
-    public function setPraGeneticTested(bool $pra_geneticTested = true): void
-    {
-        $this->pra_geneticTested = $pra_geneticTested;
-    }
-
-    /**
-     * Dog MDR1 setter.
-     *
-     * @param int $mdr1
-     */
-    public function setMdr1(int $mdr1): void
-    {
-        $this->mdr1 = $mdr1;
-    }
-
-    /**
-     * Dog MDR1 genetic test setter.
-     *
-     * @param bool $mdr1_geneticTested
-     */
-    public function setMdr1GeneticTested(bool $mdr1_geneticTested = true): void
-    {
-        $this->mdr1_geneticTested = $mdr1_geneticTested;
-    }
-
-    /**
-     * Dog Hd setter.
-     *
-     * @param int $hd
-     */
-    public function setHd(int $hd): void
-    {
-        $this->hd = $hd;
-    }
-
-    /**
-     * Dog Ed setter.
-     *
-     * @param int $ed
-     */
-    public function setEd(int $ed): void
-    {
-        $this->ed = $ed;
-    }
-
-    /**
      * Dog father setter.
      *
      * @param Dog $father
@@ -851,78 +565,6 @@ class Dog
     }
 
     /**
-     * Are these dogs MDR1 compatible?
-     *
-     * @param Dog $dog
-     *
-     * @return bool
-     */
-    private function areMdr1Compatible(Dog $dog): bool
-    {
-        return 2 > $this->getMdr1() + $dog->getMdr1();
-    }
-
-    /**
-     * Are these dogs CEA compatible?
-     *
-     * @param Dog $dog
-     *
-     * @return bool
-     */
-    private function areCeaCompatible(Dog $dog): bool
-    {
-        return 2 > $this->getCea() + $dog->getCea();
-    }
-
-    /**
-     * Are these dogs PRA compatible?
-     *
-     * @param Dog $dog
-     *
-     * @return bool
-     */
-    private function arePraCompatible(Dog $dog): bool
-    {
-        return 2 > $this->getPra() + $dog->getPra();
-    }
-
-    /**
-     * Are these dogs HSF4 compatible?
-     *
-     * @param Dog $dog
-     *
-     * @return bool
-     */
-    private function areHsf4Compatible(Dog $dog): bool
-    {
-        return 2 > $this->getHsf4() + $dog->getHsf4();
-    }
-
-    /**
-     * Are these dogs ED compatible?
-     *
-     * @param Dog $dog
-     *
-     * @return bool
-     */
-    private function areEdCompatible(Dog $dog): bool
-    {
-        return 3 > $this->getEd() + $dog->getEd();
-    }
-
-    /**
-     * Are these dogs HD compatible?
-     *
-     * @param Dog $dog
-     *
-     * @return bool
-     */
-    private function areHdCompatible(Dog $dog): bool
-    {
-        return 3 > $this->getHd() + $dog->getHd();
-    }
-
-    /**
      * Is there a male and a female.
      *
      * @param Dog $dog
@@ -957,5 +599,27 @@ class Dog
     private function areColorCompatible(Dog $dog): bool
     {
         return !($this->getColor()->isMerle() && $dog->getColor()->isMerle());
+    }
+
+    /**
+     * Test that all checkup are compatible.
+     *
+     * @param $dog
+     * @return bool
+     */
+    private function areCheckupCompatible(Dog $dog): bool
+    {
+        foreach ($this->getCheckup() as $checkup) {
+            foreach ($dog->getCheckup() as $otherCheckup) {
+                if ($otherCheckup->getHealth()->getIdentifier() !== $checkup->getCheckup()->getIdentifier) {
+                    continue;
+                }
+                if ($checkup->getValue() + $otherCheckup->getValue() >= $checkup->getHealth()->getMaximum()) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }

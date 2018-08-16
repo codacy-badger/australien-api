@@ -34,5 +34,65 @@ class Checkup
      *
      * @var int
      */
-    private $value;
+    private $value = 0;
+
+    /**
+     * Health getter.
+     *
+     * @return Health
+     */
+    public function getHealth(): Health
+    {
+        return $this->health;
+    }
+
+    /**
+     * Dog getter.
+     *
+     * @return Dog
+     */
+    public function getDog(): Dog
+    {
+        return $this->dog;
+    }
+
+    /**
+     * Value getter.
+     *
+     * @return int
+     */
+    public function getValue(): int
+    {
+        return $this->value;
+    }
+
+    /**
+     * Health setter.
+     *
+     * @param Health $health
+     */
+    public function setHealth(Health $health): void
+    {
+        $this->health = $health;
+    }
+
+    /**
+     * Dog setter.
+     *
+     * @param Dog $dog
+     */
+    public function setDog(Dog $dog): void
+    {
+        $this->dog = $dog;
+    }
+
+    /**
+     * Value setter.
+     *
+     * @param int $value
+     */
+    public function setValue(int $value): void
+    {
+        $this->value = $value;
+    }
 }
