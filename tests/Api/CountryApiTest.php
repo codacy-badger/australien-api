@@ -11,6 +11,7 @@
 namespace App\Tests\Api;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class to test API on country.
@@ -50,5 +51,38 @@ class CountryApiTest extends WebTestCase
         self::assertEquals('FR', $jsonResponse->code);
         self::assertEquals('France', $jsonResponse->name);
         self::assertNull($jsonResponse->geometry);
+    }
+
+    /**
+     * Delete a country is not possible.
+     */
+    public function testDeleteItem()
+    {
+        $client = static::createClient();
+        $client->request('DELETE', '/api/countries/FR');
+        self::assertFalse($client->getResponse()->isSuccessful());
+        self::assertEquals(Response::HTTP_METHOD_NOT_ALLOWED, $client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Update a country is not possible.
+     */
+    public function testUpdateItem()
+    {
+        $client = static::createClient();
+        $client->request('PUT', '/api/countries/FR');
+        self::assertFalse($client->getResponse()->isSuccessful());
+        self::assertEquals(Response::HTTP_METHOD_NOT_ALLOWED, $client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Create a country is not possible.
+     */
+    public function testCreateItem()
+    {
+        $client = static::createClient();
+        $client->request('POST', '/api/countries/FR');
+        self::assertFalse($client->getResponse()->isSuccessful());
+        self::assertEquals(Response::HTTP_METHOD_NOT_ALLOWED, $client->getResponse()->getStatusCode());
     }
 }
