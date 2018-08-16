@@ -4,8 +4,9 @@ App\Entity\Color:
   table: tr_color
   repositoryClass: App\Repository\ColorRepository
   id:
-    id:
+    colorId:
       type: integer
+      column: color_id
       generator:
         strategy: AUTO
   fields:

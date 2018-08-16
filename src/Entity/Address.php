@@ -27,7 +27,7 @@ class Address implements SpatialInterface
      *
      * @var int
      */
-    private $id;
+    private $addressId;
 
     /**
      * Region.
@@ -69,9 +69,9 @@ class Address implements SpatialInterface
      *
      * @return int
      */
-    public function getId(): ?int
+    public function getAddressId(): ?int
     {
-        return $this->id;
+        return $this->addressId;
     }
 
     /**

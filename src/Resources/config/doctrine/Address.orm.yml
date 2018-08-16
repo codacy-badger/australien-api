@@ -4,8 +4,9 @@ App\Entity\Address:
   schema: data
   table: te_address
   id:
-    id:
+    addressId:
       type: integer
+      column: address_id
       generator:
         strategy: AUTO
   fields:
@@ -25,9 +26,12 @@ App\Entity\Address:
       type: geometry
       nullable: true
       column: ad_geometry
+  indexes:
+    idx_address_locality:
+      columns: [locality_id]
   manyToOne:
     locality:
       targetEntity: App\Entity\Locality
       joinColumns:
         locality_id:
-          referencedColumnName: id
+          referencedColumnName: locality_id

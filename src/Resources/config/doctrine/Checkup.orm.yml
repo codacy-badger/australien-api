@@ -1,0 +1,37 @@
+App\Entity\Checkup:
+  type: entity
+  schema: data
+  table: tj_checkup
+  repositoryClass: App\Repository\CheckupRepository
+  id:
+    health:
+      type: integer
+      associationKey: true
+      column: health_id
+    dog:
+      type: integer
+      associationKey: true
+      column: dog_id
+  fields:
+    value:
+      type: integer
+      nullable: false
+  indexes:
+    idx_checkup_health:
+      columns: [health_id]
+    idx_checkup_dog:
+      columns: [dog_id]
+  manyToOne:
+    health:
+      targetEntity: App\Entity\Health
+      joinColumns:
+        health_id:
+          referencedColumnName: health_id
+          nullable: false
+    dog:
+      targetEntity: App\Entity\Dog
+      inversedBy: checkup
+      joinColumns:
+        dog_id:
+          referencedColumnName: dog_id
+          nullable: false

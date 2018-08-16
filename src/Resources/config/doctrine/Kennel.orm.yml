@@ -4,20 +4,27 @@ App\Entity\Kennel:
   schema: data
   table: te_kennel
   id:
-    id:
+    kennelId:
       type: integer
+      column: kennel_id
       generator:
         strategy: AUTO
   fields:
     legalName:
       type: text
       nullable: false
+  indexes:
+    idx_kennel_owner:
+      columns: [owner_id]
+  uniqueConstraints:
+    uk_kennel_address:
+      columns: [address_id]
   oneToOne:
     address:
       targetEntity: App\Entity\Address
       joinColumns:
         address_id:
-          referencedColumnName: id
+          referencedColumnName: address_id
           unique: true
   oneToMany:
     dogs:

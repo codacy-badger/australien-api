@@ -37,7 +37,7 @@ class AddressTest extends TestCase
      */
     public function testConstructor()
     {
-        self::assertNull($this->address->getId());
+        self::assertNull($this->address->getAddressId());
         self::assertNull($this->address->getGeometry());
         self::assertNull($this->address->getLocality());
         self::assertNull($this->address->getPostalCode());

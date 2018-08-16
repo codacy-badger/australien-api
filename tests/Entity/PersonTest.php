@@ -44,7 +44,7 @@ class PersonTest extends TestCase
         self::assertEmpty($this->person->getDogs());
         self::assertNull($this->person->getEmail());
         self::assertNull($this->person->getFamilyName());
-        self::assertNull($this->person->getId());
+        self::assertNull($this->person->getPersonId());
         self::assertNull($this->person->getJobTitle());
         self::assertNotNull($this->person->getKennels());
         self::assertEmpty($this->person->getKennels());

@@ -12,6 +12,7 @@ namespace App\Entity;
 
 use App\Exception\SexException;
 use DateTime;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Dog class.
@@ -51,7 +52,7 @@ class Dog
      *
      * @var int
      */
-    private $id;
+    private $dogId;
 
     /**
      * Dog birthday.
@@ -66,6 +67,13 @@ class Dog
      * @var string
      */
     private $breeder;
+
+    /**
+     * Dog checkups
+     *
+     * @var Collection|Checkup
+     */
+    private $checkup;
 
     /**
      * Dog deathday.
@@ -110,6 +118,13 @@ class Dog
      * @var string
      */
     private $tatoo;
+
+    /**
+     * UUID for dog link.
+     *
+     * @var string
+     */
+    private $uuid;
 
     /**
      * Health : HSF4.
@@ -302,9 +317,9 @@ class Dog
      *
      * @return int
      */
-    public function getId(): ?int
+    public function getDogId(): ?int
     {
-        return $this->id;
+        return $this->dogId;
     }
 
     /**

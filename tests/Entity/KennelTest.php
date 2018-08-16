@@ -39,7 +39,7 @@ class KennelTest extends TestCase
     public function testConstruct()
     {
         self::assertNull($this->kennel->getAddress());
-        self::assertNull($this->kennel->getId());
+        self::assertNull($this->kennel->getKennelId());
         self::assertNotNull($this->kennel->getDogs());
         self::assertEmpty($this->kennel->getDogs());
         self::assertNull($this->kennel->getLegalName());

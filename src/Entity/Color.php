@@ -22,7 +22,7 @@ class Color
      *
      * @var int
      */
-    private $id;
+    private $colorId;
 
     /**
      * Code of the color.
@@ -98,9 +98,9 @@ class Color
      *
      * @return int
      */
-    public function getId(): int
+    public function getColorId(): int
     {
-        return $this->id;
+        return $this->colorId;
     }
 
     /**

@@ -54,27 +54,18 @@ class DogTest extends TestCase
         self::assertNull($this->dog->getBreeder());
         self::assertNull($this->dog->getCea());
         self::assertNull($this->dog->getDeathday());
-        self::assertNull($this->dog->getEd());
         self::assertNull($this->dog->getFather());
-        self::assertNull($this->dog->getId());
-        self::assertNull($this->dog->getHd());
-        self::assertNull($this->dog->getHsf4());
+        self::assertNull($this->dog->getDogId());
         self::assertNull($this->dog->getKennel());
-        self::assertNull($this->dog->getMdr1());
         self::assertNull($this->dog->getMother());
         self::assertNull($this->dog->getName());
         self::assertNull($this->dog->getOwner());
         self::assertNull($this->dog->getPedigreeNumber());
-        self::assertNull($this->dog->getPra());
         self::assertNull($this->dog->getTatoo());
         self::assertNull($this->dog->getTail());
-        self::assertFalse($this->dog->isCeaGeneticTested());
         self::assertFalse($this->dog->isDead());
-        self::assertFalse($this->dog->isHsf4GeneticTested());
         self::assertFalse($this->dog->isFemale());
         self::assertFalse($this->dog->isMale());
-        self::assertFalse($this->dog->isMdr1GeneticTested());
-        self::assertFalse($this->dog->isPraGeneticTested());
         self::assertTrue($this->dog->isSexUnknown());
         self::assertFalse($this->dog->isSterilized());
     }
@@ -336,132 +327,6 @@ class DogTest extends TestCase
         $this->dog->setTail($tail);
 
         self::assertEquals($tail, $this->dog->getTail());
-    }
-
-    /**
-     * Test getter and setter of hsf4.
-     */
-    public function testHsf4()
-    {
-        $hsf4 = Dog::MOINSMOINS;
-        $this->dog->setHsf4($hsf4);
-
-        self::assertEquals($hsf4, $this->dog->getHsf4());
-    }
-
-    /**
-     * Test getter and setter of sterilization.
-     */
-    public function testSetHsf4GeneticTested()
-    {
-        $this->dog->setHsf4GeneticTested();
-        self::assertTrue($this->dog->isHsf4GeneticTested());
-
-        $this->dog->setHsf4GeneticTested(false);
-        self::assertFalse($this->dog->isHsf4GeneticTested());
-
-        $this->dog->setHsf4GeneticTested(true);
-        self::assertTrue($this->dog->isHsf4GeneticTested());
-    }
-
-    /**
-     * Test getter and setter of cea.
-     */
-    public function testCea()
-    {
-        $cea = Dog::MOINSMOINS;
-        $this->dog->setCea($cea);
-
-        self::assertEquals($cea, $this->dog->getCea());
-    }
-
-    /**
-     * Test getter and setter of sterilization.
-     */
-    public function testSetCeaGeneticTested()
-    {
-        $this->dog->setCeaGeneticTested();
-        self::assertTrue($this->dog->isCeaGeneticTested());
-
-        $this->dog->setCeaGeneticTested(false);
-        self::assertFalse($this->dog->isCeaGeneticTested());
-
-        $this->dog->setCeaGeneticTested(true);
-        self::assertTrue($this->dog->isCeaGeneticTested());
-    }
-
-    /**
-     * Test getter and setter of mdr1.
-     */
-    public function testMdr1()
-    {
-        $mdr1 = Dog::MOINSMOINS;
-        $this->dog->setMdr1($mdr1);
-
-        self::assertEquals($mdr1, $this->dog->getMdr1());
-    }
-
-    /**
-     * Test getter and setter of sterilization.
-     */
-    public function testSetMdr1GeneticTested()
-    {
-        $this->dog->setMdr1GeneticTested();
-        self::assertTrue($this->dog->isMdr1GeneticTested());
-
-        $this->dog->setMdr1GeneticTested(false);
-        self::assertFalse($this->dog->isMdr1GeneticTested());
-
-        $this->dog->setMdr1GeneticTested(true);
-        self::assertTrue($this->dog->isMdr1GeneticTested());
-    }
-
-    /**
-     * Test getter and setter of pra.
-     */
-    public function testPra()
-    {
-        $pra = Dog::MOINSMOINS;
-        $this->dog->setPra($pra);
-
-        self::assertEquals($pra, $this->dog->getPra());
-    }
-
-    /**
-     * Test getter and setter of sterilization.
-     */
-    public function testSetPraGeneticTested()
-    {
-        $this->dog->setPraGeneticTested();
-        self::assertTrue($this->dog->isPraGeneticTested());
-
-        $this->dog->setPraGeneticTested(false);
-        self::assertFalse($this->dog->isPraGeneticTested());
-
-        $this->dog->setPraGeneticTested(true);
-        self::assertTrue($this->dog->isPraGeneticTested());
-    }
-
-    /**
-     * Test getter and setter of ed.
-     */
-    public function testEd()
-    {
-        $ed = Dog::C;
-        $this->dog->setEd($ed);
-
-        self::assertEquals($ed, $this->dog->getEd());
-    }
-
-    /**
-     * Test getter and setter of hd.
-     */
-    public function testHd()
-    {
-        $hd = Dog::C;
-        $this->dog->setHd($hd);
-
-        self::assertEquals($hd, $this->dog->getHd());
     }
 
     /**

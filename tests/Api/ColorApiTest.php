@@ -48,7 +48,7 @@ class ColorApiTest extends WebTestCase
         self::assertEquals('/api/contexts/Color', $jsonResponse->{'@context'});
         self::assertEquals('/api/colors/1', $jsonResponse->{'@id'});
         self::assertEquals('https://schema.org/Thing', $jsonResponse->{'@type'});
-        self::assertEquals('1', $jsonResponse->id);
+        self::assertEquals('1', $jsonResponse->colorId);
         self::assertEquals('gris-merle', $jsonResponse->identifier);
         self::assertEquals('Gris Merle', $jsonResponse->name);
     }

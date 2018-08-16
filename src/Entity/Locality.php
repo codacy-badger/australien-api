@@ -27,7 +27,7 @@ class Locality implements SpatialInterface
      *
      * @var int
      */
-    private $id;
+    private $localityId;
 
     /**
      * Locality name.
@@ -48,9 +48,9 @@ class Locality implements SpatialInterface
      *
      * @return int
      */
-    public function getId(): ?int
+    public function getLocalityId(): ?int
     {
-        return $this->id;
+        return $this->localityId;
     }
 
     /**

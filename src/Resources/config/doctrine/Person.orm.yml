@@ -4,7 +4,7 @@ App\Entity\Person:
   repositoryClass: App\Repository\PersonRepository
   table: te_owner
   id:
-    id:
+    personId:
       type: integer
       column: usr_id
       generator:
@@ -47,6 +47,8 @@ App\Entity\Person:
   uniqueConstraints:
     uk_usr_email:
       columns: [usr_email]
+    uk_person_address:
+      columns: [address_id]
   options:
     comment: Utilisateurs de l'application
   oneToOne:
@@ -54,7 +56,7 @@ App\Entity\Person:
       targetEntity: App\Entity\Address
       joinColumns:
         address_id:
-          referencedColumnName: id
+          referencedColumnName: address_id
           unique: true
   oneToMany:
     dogs:

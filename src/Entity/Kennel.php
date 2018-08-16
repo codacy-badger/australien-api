@@ -25,7 +25,7 @@ class Kennel
      *
      * @var int
      */
-    private $id;
+    private $kennelId;
 
     /**
      * Kennel legal name.
@@ -78,9 +78,9 @@ class Kennel
      *
      * @return int
      */
-    public function getId(): ?int
+    public function getKennelId(): ?int
     {
-        return $this->id;
+        return $this->kennelId;
     }
 
     /**

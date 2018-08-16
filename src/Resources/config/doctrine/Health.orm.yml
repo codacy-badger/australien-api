@@ -1,0 +1,21 @@
+App\Entity\Health:
+  type: entity
+  schema: relation
+  table: tr_health
+  repositoryClass: App\Repository\HealthRepository
+  id:
+    healthId:
+      type: integer
+      column: health_id
+      generator:
+        strategy: AUTO
+  fields:
+    identifier:
+      type: string
+      nullable: false
+    maximum:
+      type: integer
+      nullable: false
+  uniqueConstraints:
+    uk_health_identifier:
+      columns: [identifier]

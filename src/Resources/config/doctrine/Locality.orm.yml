@@ -4,8 +4,9 @@ App\Entity\Locality:
   schema: relation
   table: tr_locality
   id:
-    id:
+    localityId:
       type: integer
+      column: locality_id
       generator:
         strategy: AUTO
   fields:
@@ -18,9 +19,12 @@ App\Entity\Locality:
       type: geometry
       nullable: true
       column: lo_geometry
+  indexes:
+    idx_locality_country:
+      columns: [country_id]
   manyToOne:
     country:
       targetEntity: App\Entity\Country
       joinColumns:
-        country_code:
+        country_id:
           referencedColumnName: code

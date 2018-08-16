@@ -38,7 +38,7 @@ class LocalityTest extends TestCase
      */
     public function testConstructor()
     {
-        self::assertNull($this->locality->getId());
+        self::assertNull($this->locality->getLocalityId());
         self::assertNull($this->locality->getGeometry());
     }
 

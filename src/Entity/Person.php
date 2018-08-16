@@ -25,7 +25,7 @@ class Person
      *
      * @var int
      */
-    private $id;
+    private $personId;
 
     /**
      * Owner additionnal name.
@@ -118,9 +118,9 @@ class Person
      *
      * @return int
      */
-    public function getId(): ?int
+    public function getPersonId(): ?int
     {
-        return $this->id;
+        return $this->personId;
     }
 
     /**
