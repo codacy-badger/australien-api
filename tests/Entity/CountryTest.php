@@ -36,7 +36,7 @@ class CountryTest extends TestCase
      */
     public function testConstructor()
     {
-        self::assertNull($this->country->getCode());
+        self::assertNull($this->country->getIdentifier());
         self::assertNull($this->country->getGeometry());
         self::assertNull($this->country->getName());
     }
@@ -48,8 +48,8 @@ class CountryTest extends TestCase
     {
         $code = 'FR';
 
-        $this->country->setCode($code);
-        self::assertEquals($code, $this->country->getCode());
+        $this->country->setIdentifier($code);
+        self::assertEquals($code, $this->country->getIdentifier());
     }
 
     /**

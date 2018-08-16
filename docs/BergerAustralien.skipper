@@ -178,10 +178,14 @@
       </orm-attributes>
     </entity>
     <association from="\App\Entity\Locality" to="\App\Entity\Country" caption="Country Locality" inverse-alias="country" many-owner="true" many-inverse="false" uuid="b956bc2e-bdd5-4678-a78c-30548b673a0b">
-      <association-field from="country_code" to="code"/>
+      <association-field from="country_code" to="identifier"/>
     </association>
     <entity name="\App\Entity\Country" local-name="Country" namespace="\App\Entity" local-namespace="Entity" uuid="8a00460a-9a42-4218-990f-1134d72c729e">
-      <field name="code" type="string" size="2" required="true" unique="true" primary="true" uuid="65c3c0a2-8e50-42aa-a934-b0efc6d2f75f"/>
+      <field name="identifier" type="string" size="2" required="true" unique="true" primary="true" uuid="65c3c0a2-8e50-42aa-a934-b0efc6d2f75f">
+        <orm-attributes>
+          <attribute name="column">code</attribute>
+        </orm-attributes>
+      </field>
       <field name="name" type="string" size="100" required="true" uuid="e4f4d077-db1e-4d31-83e9-8837e9967b60"/>
       <field name="geometry" type="geometry" uuid="4b58aeab-9b75-4b97-abec-20dfaf58b1eb">
         <orm-attributes>
@@ -189,7 +193,7 @@
         </orm-attributes>
       </field>
       <index name="idx_country_code">
-        <index-field name="code"/>
+        <index-field name="identifier"/>
       </index>
       <orm-attributes>
         <attribute name="schema">relation</attribute>

@@ -25,11 +25,9 @@ class Country implements SpatialInterface
     /**
      * Code of country.
      *
-     * @TODO rename code into identifier
-     *
      * @var string
      */
-    private $code;
+    private $identifier;
 
     /**
      * Country name.
@@ -43,9 +41,9 @@ class Country implements SpatialInterface
      *
      * @return string
      */
-    public function getCode(): ?string
+    public function getIdentifier(): ?string
     {
-        return $this->code;
+        return $this->identifier;
     }
 
     /**
@@ -61,11 +59,11 @@ class Country implements SpatialInterface
     /**
      * Country code setter.
      *
-     * @param string $code
+     * @param string $identifier
      */
-    public function setCode(string $code): void
+    public function setIdentifier(string $identifier): void
     {
-        $this->code = $code;
+        $this->identifier = $identifier;
     }
 
     /**

@@ -4,9 +4,10 @@ App\Entity\Country:
   table: tr_country
   repositoryClass: App\Repository\CountryRepository
   id:
-    code:
+    identifier:
       type: string
       length: 2
+      column: code
   fields:
     name:
       type: string
