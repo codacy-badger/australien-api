@@ -49,7 +49,7 @@ class LocalityApiTest extends WebTestCase
         self::assertEquals('/api/localities/1', $jsonResponse->{'@id'});
         self::assertEquals('https://schema.org/addressLocality', $jsonResponse->{'@type'});
         self::assertEquals('1', $jsonResponse->localityId);
-        self::assertEquals('Aixàs', $jsonResponse->name);
+        self::assertEquals('Aast', $jsonResponse->name);
         self::assertNotNull($jsonResponse->geometry);
         self::assertNotNull($jsonResponse->geometry->latitude);
         self::assertNotNull($jsonResponse->geometry->longitude);
