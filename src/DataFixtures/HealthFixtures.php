@@ -30,6 +30,7 @@ class HealthFixtures extends Fixture
         $manager->persist($mdr1);
         $this->addReference('health-mdr1', $mdr1);
 
+        //progressive atrophy of the retina
         $pra = new Health();
         $pra->setIdentifier('PRA');
         $pra->setMaximum(1);
