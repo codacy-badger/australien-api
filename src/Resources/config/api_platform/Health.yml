@@ -1,0 +1,9 @@
+resources:
+    App\Entity\Health:
+        shortName: 'Health'
+        description: 'All available health test available for australian shepard.'
+        iri: 'https://schema.org/Thing'
+        collectionOperations:
+            get: ~
+        itemOperations:
+            get: ~

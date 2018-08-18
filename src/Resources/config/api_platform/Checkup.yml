@@ -1,0 +1,5 @@
+resources:
+    App\Entity\Checkup:
+        shortName: 'Checkup'
+        description: 'All checkup realised on a dog'
+        iri: 'https://schema.org/Thing'
